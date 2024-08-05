@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "node backend_menu_qr/server.js",
-    "heroku-postbuild": "cd frontend_menu_qr && npm install && npx vue-cli-service build"
+    "heroku-postbuild": "cd frontend_menu_qr && npm install && npm run build"
   },
   "dependencies": {
     "cors": "^2.8.5",
