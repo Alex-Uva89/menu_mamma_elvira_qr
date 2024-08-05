@@ -2,8 +2,8 @@
   "name": "menu_mamma_elvira_qr",
   "version": "1.0.0",
   "scripts": {
-    "start": "node backend/server.js",
-    "heroku-postbuild": "cd frontend_menu_qr && npm install && npx vue-cli-service build"
+    "start": "node backend_menu_qr/server.js",
+    "heroku-postbuild": "cd frontend_menu_qr && npm install && npm vue-cli-service build"
   },
   "dependencies": {
     "cors": "^2.8.5",
