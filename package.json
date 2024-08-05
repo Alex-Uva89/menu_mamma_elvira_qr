@@ -1,0 +1,14 @@
+{
+    "name": "menu_mamma_elvira_qr",
+    "version": "1.0.0",
+    "scripts": {
+      "start": "node backend/server.js",
+      "heroku-postbuild": "cd frontend && npm install && npm run build"
+    },
+    "dependencies": {
+      "cors": "^2.8.5",
+      "express": "^4.17.1",
+      "mysql": "^2.18.1"
+    }
+  }
+  
