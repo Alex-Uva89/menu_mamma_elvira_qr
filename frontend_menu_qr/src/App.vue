@@ -70,7 +70,7 @@
       };
     },
     mounted() {
-        axios.get('${process.env.VUE_APP_API_URL}/api/venues')
+        axios.get(`${process.env.VUE_APP_API_URL}/api/venues`)
         .then(response => {
           this.venues = response.data;
 
