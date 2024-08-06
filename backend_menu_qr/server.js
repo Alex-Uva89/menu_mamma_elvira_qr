@@ -11,13 +11,13 @@ app.use(cors());
 app.use(express.json());
 
 // Serve static files from the Vue frontend app
-app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
+app.use(express.static(path.join(__dirname, '..', 'frontend', 'dist')));
 
 const connection = mysql.createConnection({
-  host: 'menu-mamma-elvira.cpuk68cqabe5.eu-south-1.rds.amazonaws.com',
-  user: 'adminDev',
-  password: '*1qaz2wsx3edc',
-  database: 'db_menu'
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME
 });
 
 connection.connect((err) => {
