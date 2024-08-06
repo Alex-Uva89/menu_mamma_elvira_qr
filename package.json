@@ -11,7 +11,8 @@
     "mysql": "^2.18.1"
   },
   "devDependencies": {
-    "@vue/cli-service": "^5.0.8"
+    "@vue/cli-service": "^5.0.8",
+    "@vue/cli-plugin-babel": "~5.0.0"
   },
   "engines": {
     "node": "18.20.2",
