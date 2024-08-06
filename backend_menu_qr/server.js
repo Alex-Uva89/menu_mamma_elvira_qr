@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 // Serve static files from the Vue frontend app
-app.use(express.static(path.join(__dirname, '..', 'frontend', 'dist')));
+app.use(express.static(path.join(__dirname, '..', 'frontend_menu_qr', 'dist')));
 
 const connection = mysql.createConnection({
   host: process.env.DB_HOST,
@@ -116,7 +116,7 @@ app.get('/api/venues/:venue', (req, res) => {
 
 // All other requests not handled by the API routes should serve the frontend app
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
+  res.sendFile(path.join(__dirname, '..', 'frontend_menu_qr', 'dist', 'index.html'));
 });
 
 app.listen(port, () => {
