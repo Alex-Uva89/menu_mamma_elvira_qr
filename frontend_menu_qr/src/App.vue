@@ -11,10 +11,6 @@
 <style lang="scss">
 
 .home{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
   height: 100vh;
   width: 100%;
   background-color: var(--mamma-stone);

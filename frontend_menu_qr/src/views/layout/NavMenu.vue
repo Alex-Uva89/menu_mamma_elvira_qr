@@ -70,21 +70,25 @@
             this.wines = Object.values(this.categories)
                 .filter(category => category.is_drink && category.name.toLowerCase().includes('vini'));
             this.$emit('update-category', this.wines);
+            this.$emit('category-name', 'Vini');
         },
         sendDataDistillati() {
             this.distillati = Object.values(this.categories)
                 .filter(category => category.is_drink && !category.name.toLowerCase().includes('vini') && !category.name.toLowerCase().includes('cocktails'));
             this.$emit('update-category', this.distillati);
+            this.$emit('category-name', 'Distillati');
+        
         },
         sendDataCocktails() {
             this.cocktails = Object.values(this.categories)
                 .filter(category => category.is_drink && category.name.toLowerCase().includes('cocktails'));
             this.$emit('update-category', this.cocktails);
+            this.$emit('category-name', 'Cocktails');
         },
         sendDataFood(category) {
             this.foods = category;
-            console.log('Category:', category);
             this.$emit('update-category', this.foods);
+            this.$emit('category-name', category.name);
         }
     }
   };

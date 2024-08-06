@@ -1,11 +1,14 @@
 <template>
-  <header-component :venuePath="venueName" class="header" />
-  <div class="venue">
-    
+  <header>
+    <header-component :venuePath="venueName" class="header" />
+    <header-navigation :venuePath="venueName" 
+      :categoryName="categoryName"
+    />
+  </header>
+  <div class="venue">  
     <template v-if="Array.isArray(categories)">
       <template v-for="category in categories" :key="category.id">
         <div>
-          <h2>{{ category.name }}</h2>
           <ul v-if="!category.is_drink && category.is_active">
             <li v-for="dish in category.dishes" :key="dish.id" class="categories">
               <span class="categories">
@@ -14,6 +17,7 @@
             </li>
           </ul>
           <ul v-else-if="category.is_drink && category.is_active">
+            {{ category.name }}
             <li v-for="drink in category.drinks" :key="drink.id" class="categories">
               <span class="categories">
                 {{ drink.name }}
@@ -26,7 +30,6 @@
 
     <template v-else>
       <div>
-        <h2>{{ categories.name }}</h2>
         <ul v-if="!categories.is_drink && categories.is_active">
           <li v-for="dish in categories.dishes" :key="dish.id" class="categories">
             <span class="categories">
@@ -43,13 +46,14 @@
         </ul>
       </div>
     </template>
-      
+    
   </div>
   <nav-component 
     :categories="venue.categories" 
     :venuePath="venueName" 
     class="footer"
     @update-category="handleUpdateCategory"
+    @category-name="handleUpdateNameCategory"
   />
 </template>
 
@@ -57,6 +61,7 @@
 import axios from 'axios';
 import NavComponent from '../views/layout/NavMenu.vue';
 import HeaderComponent from '../views/layout/HeaderMenu.vue';
+import HeaderNavigation from '../views/layout/HeaderNav.vue';
 
 export default {
   name: 'VenueMenu',
@@ -68,33 +73,38 @@ export default {
   },
   components: {
     NavComponent,
-    HeaderComponent
+    HeaderComponent,
+    HeaderNavigation
   },
   data() {
     return {
       venue: {},
       venueName: '',
-      categories: []
+      categories: [],
+      categoryName: ''
     };
   },
   mounted() {
       this.venueName = this.$route.params.venue;
-
       this.fetchVenueData();
-  },
-  methods: {
-    fetchVenueData() {
-      axios.get(`${process.env.VUE_APP_API_URL}/api/venues/${this.venueName}`)
+    },
+    methods: {
+      fetchVenueData() {
+        axios.get(`${process.env.VUE_APP_API_URL}/api/venues/${this.venueName}`)
         .then(response => {
           this.venue = response.data;
+          this.categories = this.venue.categories[3]
+          this.categoryName = this.categories.name;
         })
         .catch(error => {
           console.error('Errore durante il recupero dei dati del locale:', error);
         });
     },
     handleUpdateCategory(category) {
-      console.log('DATTO RICEVUTO:', category);
       this.categories = category;
+    },
+    handleUpdateNameCategory(name) {
+      this.categoryName = name;
     }
   },
 };
@@ -104,14 +114,16 @@ export default {
 img {
   max-width: 200px;
 }
-.header{
+header{
+  position: sticky;
+  top: 0;
   z-index: 100;
+  width: 100%;
 }
 
 .venue {
-  margin: 65px auto 150px;
   max-width: 100%;
-  max-height: 100vh;
+  max-height: calc(100vh - 300px);
   padding: 20px;
   overflow-y: scroll;
   scrollbar-width: none;
