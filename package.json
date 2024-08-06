@@ -2,14 +2,16 @@
   "name": "menu_mamma_elvira_qr",
   "version": "1.0.0",
   "scripts": {
-    "start": "node backend/server.js",
+    "start": "node backend_menu_qr/server.js",
     "heroku-postbuild": "cd frontend_menu_qr && npm install && npm run build"
   },
   "dependencies": {
     "axios": "^1.7.2",
     "cors": "^2.8.5",
-    "express": "^4.17.1",
+    "express": "^4.19.2",
     "mysql": "^2.18.1",
+    "fs": "^0.0.1-security",
+    "https": "^1.0.0",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
     "vuex": "^4.0.0",
