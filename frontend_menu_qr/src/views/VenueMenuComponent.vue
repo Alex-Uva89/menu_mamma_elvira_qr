@@ -84,7 +84,7 @@ export default {
   },
   methods: {
     fetchVenueData() {
-      axios.get(`http://localhost:3000/api/venues/${this.venueName}`)
+      axios.get(`${process.env.VUE_APP_API_URL}/api/venues/${this.venueName}`)
         .then(response => {
           this.venue = response.data;
         })
