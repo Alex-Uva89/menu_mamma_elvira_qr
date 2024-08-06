@@ -120,6 +120,20 @@ app.get('/api/venues/:venue', (req, res) => {
   });
 });
 
+app.get('/api/allergens', (req, res) => {
+  const query = `SELECT * FROM allergens`;
+
+  connection.query(query, (err, results) => {
+    if (err) {
+      console.error('Error retrieving allergens:', err);
+      res.status(500).json({ error: 'Error retrieving allergens' });
+      return;
+    }
+
+    res.json(results);
+  });
+});
+
 // All other requests not handled by the API routes should serve the frontend app
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'frontend_menu_qr', 'dist', 'index.html'));

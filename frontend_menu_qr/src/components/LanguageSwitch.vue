@@ -1,6 +1,6 @@
 <template>
     <div class="language-switch">
-      <button @click="toggleLanguage" class="pill-button">
+      <button @click="toggleLanguage" class="pill-button" style="background-color: var(--white);">
         {{ currentLanguage === 'it' ? 'ENG' : 'ITA' }}
       </button>
     </div>
@@ -27,18 +27,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  .pill-button {
-    background-color: var(--white);
-    border: none;
-    color: var(--text-color);
-    padding: 5px 10px;
-    border-radius: 50px;
-    cursor: pointer;
-    font-family: var(--Decima);
-    font-size: 16px;
-    transition: background-color 0.3s;
   }
   
   .pill-button:hover {

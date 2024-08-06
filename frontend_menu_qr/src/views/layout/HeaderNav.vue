@@ -1,13 +1,13 @@
 <template>
         <div :style="{ background: `var(--header-${venuePath.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">
             <div class="backgroundNav">
-                <div >
-                    logo
+                <div class="logo">
+                    <img src="../../../public/assets/mammaelvira_2024.svg" alt="">
                 </div>
                 <span>
                     {{ categoryName }}
                 </span>
-                <AllergensButton />
+                <AllergensButton :venuePath="venuePath" />
             </div>
         </div>
 </template>
@@ -51,6 +51,11 @@ export default {
     z-index: 0;
     font-size: 1.5rem;
     text-transform: uppercase;
+}
+
+.logo{
+    width: 60px;
+    height: 40px;
 }
 
 </style>
