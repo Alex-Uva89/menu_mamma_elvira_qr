@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
@@ -10,10 +12,9 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-app.use(cors({
-  origin: 'https://menu-mammaelvira-fe-80d79ebfc254.herokuapp.com',
-}));
-app.use(express.json());
+const corsOptions = {
+  origin: process.env.CORS_URL || '*',
+};
 
 // Serve static files from the Vue frontend app
 app.use(express.static(path.join(__dirname, '..', 'frontend_menu_qr', 'dist')));
