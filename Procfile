@@ -1,1 +1,1 @@
-web: node backend/server.js
+web: node backend_menu_qr/server.js
