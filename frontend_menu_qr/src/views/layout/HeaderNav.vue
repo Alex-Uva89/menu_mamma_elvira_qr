@@ -12,7 +12,7 @@
             <div v-if="selectedAllergens.length > 0" class="allergenFilter">
                 Filtri attivi:
                 <div>
-                    <img v-for="allergen in selectedAllergens" :key="allergen.id":src="allergen.icon" alt="">
+                    <img v-for="allergen in selectedAllergens" :key="allergen.id":src="allergen.icon" alt="" @click="deleteFilterAllergen(allergen)">
                 </div>
             </div>
         </div>
@@ -46,7 +46,15 @@ export default {
         handleFilterAllergen(allergenId) {
             this.selectedAllergens = allergenId;
             this.$emit('filter-allergen', this.selectedAllergens);
+        },
+        deleteFilterAllergen(allergen) {
+            const index = this.selectedAllergens.findIndex(a => a.id === allergen.id);
+            if (index !== -1) {
+                this.selectedAllergens.splice(index, 1);
+                this.$emit('filter-allergen', this.selectedAllergens);
+            }
         }
+    
     },
 }
 

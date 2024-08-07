@@ -1,6 +1,8 @@
 <template>
     <span>
-        <button class="pill-button" @click="toggleShowAllergens" style="color: var(--white); font-size: 14.5px;">Allergeni</button>
+        <button class="pill-button" @click="toggleShowAllergens" style="color: var(--white); font-size: 14.5px;">
+            {{ showAllergens ? 'salva' : 'allergeni' }}
+        </button>
         <div v-if="showAllergens" class="allergens-modal" :style="{ background: `var(--header-${venuePath.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">
             <ul>
                 <li v-for="allergen in allergens" :key="allergen.id" :id="allergen.id" :class="{'allergen': true, 'selected': isSelected(allergen)}" @click="filterAllergen(allergen)">
@@ -86,7 +88,7 @@ export default {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     z-index: 100;
     ul{
-        margin:30px auto;
+        margin:30px 10px;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
@@ -113,6 +115,7 @@ export default {
     .nb {
         position: fixed;
         bottom: 50px;
+        color: var(--text-color);
         font-size: .9rem;
         text-align: center;
         width: 100%;
