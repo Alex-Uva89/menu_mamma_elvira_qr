@@ -134,6 +134,21 @@ app.get('/api/allergens', (req, res) => {
   });
 });
 
+
+app.get('/api/dishes/allergens', (req, res) => {
+  const query = `SELECT * FROM allergen_dish`;
+
+  connection.query(query, (err, results) => {
+    if (err) {
+      console.error('Error retrieving dish allergens:', err);
+      res.status(500).json({ error: 'Error retrieving dish allergens' });
+      return;
+    }
+
+    res.json(results);
+  });
+});
+
 // All other requests not handled by the API routes should serve the frontend app
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'frontend_menu_qr', 'dist', 'index.html'));

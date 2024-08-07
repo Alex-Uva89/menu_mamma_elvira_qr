@@ -4,10 +4,16 @@
                 <div class="logo">
                     <img src="../../../public/assets/mammaelvira_2024.svg" alt="">
                 </div>
-                <span>
+                <span class="categoryName">
                     {{ categoryName }}
                 </span>
-                <AllergensButton :venuePath="venuePath" />
+                <AllergensButton :venuePath="venuePath" @filter-allergen="handleFilterAllergen" />
+            </div>
+            <div v-if="selectedAllergens.length > 0" class="allergenFilter">
+                Filtri attivi:
+                <div>
+                    <img v-for="allergen in selectedAllergens" :key="allergen.id":src="allergen.icon" alt="">
+                </div>
             </div>
         </div>
 </template>
@@ -31,6 +37,17 @@ export default {
     components: {
         AllergensButton
     },
+    data() {
+        return {
+            selectedAllergens: [],
+        };
+    },
+    methods: {
+        handleFilterAllergen(allergenId) {
+            this.selectedAllergens = allergenId;
+            this.$emit('filter-allergen', this.selectedAllergens);
+        }
+    },
 }
 
 </script>
@@ -51,6 +68,23 @@ export default {
     z-index: 0;
     font-size: 1.5rem;
     text-transform: uppercase;
+}
+.allergenFilter{
+    font-family: var(--Decima);
+    width: 100%;
+    min-height: 50px;
+    backdrop-filter: contrast(0.5);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    img{
+        width: 40px;
+    }
+}
+
+.categoryName{
+    letter-spacing: -2px;
 }
 
 .logo{

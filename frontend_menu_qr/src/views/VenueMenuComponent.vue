@@ -3,20 +3,14 @@
     <header-component :venuePath="venueName" class="header" />
     <header-navigation :venuePath="venueName" 
       :categoryName="categoryName"
+      @filter-allergen="handleFilterAllergen"
     />
   </header>
   <div class="venue">  
     <template v-if="Array.isArray(categories)">
       <template v-for="category in categories" :key="category.id">
         <div>
-          <ul v-if="!category.is_drink && category.is_active">
-            <li v-for="dish in category.dishes" :key="dish.id" class="categories">
-              <span class="categories">
-                {{ dish.name }}
-              </span>
-            </li>
-          </ul>
-          <ul v-else-if="category.is_drink && category.is_active">
+          <ul v-if="category.is_drink && category.is_active">
             {{ category.name }}
             <li v-for="drink in category.drinks" :key="drink.id" class="categories">
               <span class="categories">
@@ -32,9 +26,17 @@
       <div>
         <ul v-if="!categories.is_drink && categories.is_active">
           <li v-for="dish in categories.dishes" :key="dish.id" class="categories">
-            <span class="categories">
+            <template v-if="selectedAllergens && selectedAllergens.length > 0">
+              <span v-if="!allergensDish.some(allergen => allergen.dish_id === dish.id && selectedAllergens.some(selected => allergen.allergen_id === selected.id))">
+                {{ dish.name }}
+              </span>
+            </template>
+            <span v-else>
               {{ dish.name }}
             </span>
+          </li>
+          <li v-if="selectedAllergens && selectedAllergens.length > 0 && !categories.dishes.some(dish => !allergensDish.some(allergen => allergen.dish_id === dish.id && selectedAllergens.some(selected => allergen.allergen_id === selected.id)))">
+            Non ci sono piatti con i filtri selezionati
           </li>
         </ul>
         <ul v-else-if="categories.is_drink && categories.is_active">
@@ -81,31 +83,48 @@ export default {
       venue: {},
       venueName: '',
       categories: [],
-      categoryName: ''
+      categoryName: '',
+      selectedAllergens: [],
+      allergensDish: []
     };
   },
   mounted() {
       this.venueName = this.$route.params.venue;
       this.fetchVenueData();
+      this.fetchAllergensDish();
     },
     methods: {
       fetchVenueData() {
         axios.get(`${process.env.VUE_APP_API_URL}/api/venues/${this.venueName}`)
         .then(response => {
           this.venue = response.data;
-          this.categories = this.venue.categories[3]
+          const categoriesArray = Object.values(this.venue.categories);
+          this.categories = categoriesArray[0];
           this.categoryName = this.categories.name;
         })
         .catch(error => {
           console.error('Errore durante il recupero dei dati del locale:', error);
         });
-    },
-    handleUpdateCategory(category) {
-      this.categories = category;
-    },
-    handleUpdateNameCategory(name) {
-      this.categoryName = name;
-    }
+
+      },
+      fetchAllergensDish() {
+        axios.get(`${process.env.VUE_APP_API_URL}/api/dishes/allergens`)
+        .then(response => {
+          this.allergensDish = response.data;
+        })
+        .catch(error => {
+          console.error('Errore durante il recupero degli allergeni:', error);
+        });
+      },
+      handleUpdateCategory(category) {
+        this.categories = category;
+      },
+      handleUpdateNameCategory(name) {
+        this.categoryName = name;
+      },
+      handleFilterAllergen(allergenId) {
+        this.selectedAllergens = allergenId;
+      }
   },
 };
 </script>
@@ -120,6 +139,7 @@ header{
   z-index: 100;
   width: 100%;
 }
+
 
 .venue {
   max-width: 100%;
