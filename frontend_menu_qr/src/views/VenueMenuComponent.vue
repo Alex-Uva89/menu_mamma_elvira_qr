@@ -93,7 +93,8 @@ export default {
         axios.get(`${process.env.VUE_APP_API_URL}/api/venues/${this.venueName}`)
         .then(response => {
           this.venue = response.data;
-          this.categories = this.venue.categories[3]
+          const categoriesArray = Object.values(this.venue.categories);
+          this.categories = categoriesArray[0];
           this.categoryName = this.categories.name;
         })
         .catch(error => {

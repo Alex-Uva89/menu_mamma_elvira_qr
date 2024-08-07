@@ -39,7 +39,6 @@ export default {
         fetchAllergens() {
             axios.get(`${process.env.VUE_APP_API_URL}/api/allergens`)
                 .then(response => {
-                    console.log('ALLERGENS', response.data);
                     this.allergens = response.data;
                 })
                 .catch(error => {
