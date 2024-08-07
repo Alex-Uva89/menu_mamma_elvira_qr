@@ -4,9 +4,9 @@
         <div v-if="showAllergens" class="allergens-modal" :style="{ background: `var(--header-${venuePath.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">
             <ul>
                 <li v-for="allergen in allergens" :key="allergen.id" :id="allergen.id" :class="{'allergen': true, 'selected': isSelected(allergen)}" @click="filterAllergen(allergen)">
-      <img :src="allergen.icon" alt="">
-      {{ allergen.name }}
-    </li>
+                    <img :src="allergen.icon" alt="">
+                    {{ allergen.name }}
+                </li>
             </ul>
             <div class="allergenReset">
                 <button @click="resetAllergens">
@@ -104,6 +104,9 @@ export default {
             width: calc(100% / 4);
             &.selected{
                 filter: contrast(1.5);
+            }
+            img{
+                width: 60px;
             }
         }
     }
