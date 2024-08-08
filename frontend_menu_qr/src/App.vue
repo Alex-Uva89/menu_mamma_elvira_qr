@@ -15,17 +15,24 @@
   width: 100%;
   background-color: var(--mamma-stone);
   .home-title{
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    font-family: var(--Decima); 
     font-size: 2rem;
     text-transform: uppercase;
+    margin-bottom:10px;
   }
   .home-link{
+    height: 70%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 10px;
     a {
-        width: 300px;
+        width: 60vw ;
         height: 200px;
         padding: 30px;
         border: 1px solid #000;
