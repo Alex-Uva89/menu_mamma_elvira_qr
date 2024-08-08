@@ -11,11 +11,8 @@
       <template v-for="category in categories" :key="category.id">
         <div>
           <ul v-if="category.is_drink && category.is_active">
-            {{ category.name }}
-            <li v-for="drink in category.drinks" :key="drink.id" class="categories">
-              <span class="categories">
-                {{ drink.name }}
-              </span>
+            <li>
+              {{ category.name }}
             </li>
           </ul>
         </div>
@@ -27,12 +24,10 @@
         <ul v-if="!categories.is_drink && categories.is_active">
           <li v-for="dish in categories.dishes" :key="dish.id" class="categories">
             <template v-if="selectedAllergens && selectedAllergens.length > 0">
-              <span v-if="!allergensDish.some(allergen => allergen.dish_id === dish.id && selectedAllergens.some(selected => allergen.allergen_id === selected.id))">
-                {{ dish.name }}
-              </span>
+              <card-dish :dish="dish" />
             </template>
             <span v-else>
-              {{ dish.name }}
+              <card-dish :dish="dish" />
             </span>
           </li>
           <li v-if="selectedAllergens && selectedAllergens.length > 0 && !categories.dishes.some(dish => !allergensDish.some(allergen => allergen.dish_id === dish.id && selectedAllergens.some(selected => allergen.allergen_id === selected.id)))">
@@ -64,6 +59,7 @@ import axios from 'axios';
 import NavComponent from '../views/layout/NavMenu.vue';
 import HeaderComponent from '../views/layout/HeaderMenu.vue';
 import HeaderNavigation from '../views/layout/HeaderNav.vue';
+import CardDish from '../components/CardDish.vue';
 
 export default {
   name: 'VenueMenu',
@@ -76,7 +72,8 @@ export default {
   components: {
     NavComponent,
     HeaderComponent,
-    HeaderNavigation
+    HeaderNavigation,
+    CardDish
   },
   data() {
     return {

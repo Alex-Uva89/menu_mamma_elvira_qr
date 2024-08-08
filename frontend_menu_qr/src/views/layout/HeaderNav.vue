@@ -10,7 +10,7 @@
                 <AllergensButton :venuePath="venuePath" @filter-allergen="handleFilterAllergen" />
             </div>
             <div v-if="selectedAllergens.length > 0" class="allergenFilter">
-                Filtri attivi:
+                Allergeni esclusi:
                 <div>
                     <img v-for="allergen in selectedAllergens" :key="allergen.id":src="allergen.icon" alt="" @click="deleteFilterAllergen(allergen)">
                 </div>
@@ -92,7 +92,12 @@ export default {
 }
 
 .categoryName{
+    width: calc(100% / 3);
     letter-spacing: -2px;
+    word-spacing: -10px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .logo{

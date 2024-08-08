@@ -1,0 +1,92 @@
+  .dish-item{
+    width: 80vw;
+    height: 150px;
+    position: relative;
+    margin-bottom: 30px;
+  }
+
+  .dish-container {
+    display: flex;
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    margin: 20px;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid #556b2f;
+  }
+  .dish-item img {
+    width: 100%;
+    max-height: inherit;
+  }
+  
+  .dish-details {
+    height: 150px;
+    width: 50%;
+    padding: 10px;
+    flex-grow: 1;
+    position: absolute;
+    bottom: 0%;
+    right: 0%;
+    color: var(--white);
+  }
+
+  .dish-details div{
+    height: 50%;
+    overflow: scroll;
+  }
+
+  .dish-background {
+    background-color: #556b2f;
+    opacity: 0.8;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+  }
+  
+  .dish-details h3 {
+    margin: 0 0 10px;
+    font-size: 1.2em;
+  }
+  
+  .dish-details div p {
+    margin: 0 0 20px;
+  }
+
+  .price-tag{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: -20px;
+    right: -30px;
+  }
+  
+  .rectangle {
+    width: 50px;
+    height: 40px;
+    background-color: #6b774d; /* Colore verde oliva */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+  
+  .triangle {
+    width: 0;
+    height: 0;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 20px solid #6b774d;
+  }
+
+  
+  .price-tag span {
+    font-size: 1.2em;
+  }
