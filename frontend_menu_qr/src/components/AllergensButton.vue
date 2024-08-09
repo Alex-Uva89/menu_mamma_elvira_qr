@@ -15,7 +15,7 @@
                     deseleziona tutti gli allergeni
                 </button>
             </div>
-            <div class="nb">NB. comunicare sempre alergeni allo staff</div>
+            <div class="nb">NB. comunicare sempre allergeni allo staff</div>
         </div>
     </span>
 </template>
