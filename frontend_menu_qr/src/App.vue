@@ -45,13 +45,13 @@
     }
 
     .bg-olive {
-        background-color: olive;
+        background-color: rgb(107, 114, 56);
     }
     .bg-gray {
-        background-color: gray;
+        background-color: rgb(150, 150, 150);
     }
     .bg-red {
-        background-color: red;
+        background-color: rgb(165, 26, 26);
     }
     
   }

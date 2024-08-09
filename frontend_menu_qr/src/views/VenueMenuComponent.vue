@@ -21,6 +21,8 @@
 
     <template v-else>
       <div>
+
+        <!-- FOOD -->
         <ul v-if="!categories.is_drink && categories.is_active">
           <li v-for="dish in categories.dishes" :key="dish.id" class="categories">
             <template v-if="selectedAllergens && selectedAllergens.length > 0">
@@ -36,6 +38,8 @@
             Non ci sono piatti con i filtri selezionati
           </li>
         </ul>
+
+        <!-- DRINKS -->
         <ul v-else-if="categories.is_drink && categories.is_active">
           <li v-for="drink in categories.drinks" :key="drink.id" class="categories">
             <span class="categories">
