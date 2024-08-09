@@ -1,7 +1,7 @@
 <template>
   <section class="home">
-    <h1 v-if="isHomePage" class="home-title">I Nostri Menù</h1>
     <article class="home-link" v-if="isHomePage">
+      <h1 v-if="isHomePage" class="home-title">I Nostri Menù</h1>
       <VenueLink v-for="venue in venues" :key="venue" :venue="venue" />
     </article>
     <router-view v-if="!isHomePage"/>
@@ -14,6 +14,7 @@
   height: 100vh;
   width: 100%;
   background-color: var(--mamma-stone);
+  overflow: auto;
   .home-title{
     height: 100px;
     display: flex;
@@ -25,7 +26,7 @@
     margin-bottom:10px;
   }
   .home-link{
-    height: 70%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -33,7 +34,6 @@
     gap: 10px;
     a {
         width: 60vw ;
-        height: 200px;
         padding: 30px;
         border: 1px solid #000;
         border-radius: 5px;

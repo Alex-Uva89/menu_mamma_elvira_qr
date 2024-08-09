@@ -1,9 +1,9 @@
 <template>
-  <div>
+
     <router-link :to="'/' + venue" :class="backgroundClass">
       <img :src="'./assets/' + venue + '.svg'" :alt="venue + ' logo'" />
     </router-link>
-  </div>
+  
 </template>
   
   <script>

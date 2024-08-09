@@ -143,7 +143,6 @@ header{
 .venue {
   max-width: 100%;
   max-height: calc(100vh - 300px);
-  padding: 20px;
   overflow-y: scroll;
   scrollbar-width: none;
 }

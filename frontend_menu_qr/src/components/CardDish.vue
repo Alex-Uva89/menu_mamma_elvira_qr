@@ -11,8 +11,7 @@
         </div>
         </div>
         <div class="price-tag">
-            <div class="rectangle"> {{ dish.price }}</div>
-            <div class="triangle"></div>
+            {{ dish.price }} €
         </div>
     </div>
   </template>
