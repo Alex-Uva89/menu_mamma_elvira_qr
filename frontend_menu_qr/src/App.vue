@@ -114,11 +114,13 @@
       if (routeName === '/') {
         title = 'Home - I nostri menù';
         favicon.href = `${process.env.BASE_URL}apple-touch-icon_dark.ico`;
-      } else if (routeName.startsWith('/')) {
+      } else if (routeName.startsWith('/') && isNaN(routeName.replace('/', ''))) {
         title = 'Menu - ' + decodeURIComponent(routeName.replace('/', ''));
         favicon.href = `${routeName}.ico`;
+      } else {
+        title = '';
+        favicon.href = '';
       }
-
           document.title = title;
       }
     }
