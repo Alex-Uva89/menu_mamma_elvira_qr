@@ -1,7 +1,7 @@
 <template>
     <div class="dish-item">
       <div class="dish-container">
-        <div class="dish-background"></div>
+        <div class="dish-background" :style="{ background: `var(--nav-${venuePath.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }"></div>
         <img :src="dish.image" alt="dish Image">
         <div class="dish-details">
             <h3>{{ dish.name }}</h3>
@@ -10,7 +10,7 @@
             </div>
         </div>
         </div>
-        <div class="price-tag">
+        <div class="price-tag" :style="{ background: `var(--nav-${venuePath.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">
             {{ dish.price }} €
         </div>
     </div>
@@ -22,6 +22,10 @@
     props: {
       dish: {
         type: Object,
+        required: true
+      },
+      venuePath: {
+        type: String,
         required: true
       }
     }
