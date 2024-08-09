@@ -25,11 +25,11 @@
           <li v-for="dish in categories.dishes" :key="dish.id" class="categories">
             <template v-if="selectedAllergens && selectedAllergens.length > 0">
               <span v-if="!allergensDish.some(allergen => allergen.dish_id === dish.id && selectedAllergens.some(selected => allergen.allergen_id === selected.id))">
-                <card-dish :dish="dish" />
+                <card-dish :dish="dish" :venuePath="venueName" />
               </span>
             </template>
             <span v-else>
-              <card-dish :dish="dish" />
+              <card-dish :dish="dish" :venuePath="venueName" />
             </span>
           </li>
           <li v-if="selectedAllergens && selectedAllergens.length > 0 && !categories.dishes.some(dish => !allergensDish.some(allergen => allergen.dish_id === dish.id && selectedAllergens.some(selected => allergen.allergen_id === selected.id)))">
