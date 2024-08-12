@@ -1,9 +1,7 @@
 <template>
         <div :style="{ background: `var(--header-${venuePath.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">
             <div class="backgroundNav">
-                <div class="logo">
-                    <img src="../../../public/assets/mammaelvira_2024.svg" alt="">
-                </div>
+                <select-view :openList="openList" :openListImg="openListImg" @openList="updateOpenList" @openListImg="updateOpenList" />
                 <span class="categoryName">
                     {{ categoryName }}
                 </span>
@@ -20,6 +18,7 @@
 
 <script>
 import AllergensButton from '../../components/AllergensButton.vue'
+import SelectView from '../../components/SelectView.vue';
 
 
 export default {
@@ -35,7 +34,8 @@ export default {
         }
     },
     components: {
-        AllergensButton
+        AllergensButton,
+        SelectView
     },
     data() {
         return {
@@ -53,8 +53,15 @@ export default {
                 this.selectedAllergens.splice(index, 1);
                 this.$emit('filter-allergen', this.selectedAllergens);
             }
+        },
+        updateOpenList(value) {
+            this.$emit('update-open-list', value); 
+            this.$emit('update-open-list-img', !value);
+        },
+        updateOpenListImg(value) {
+            this.$emit('update-open-list-img', value);
+            this.$emit('update-open-list', !value);
         }
-    
     },
 }
 
@@ -100,9 +107,5 @@ export default {
     text-overflow: ellipsis;
 }
 
-.logo{
-    width: 60px;
-    height: 40px;
-}
 
 </style>

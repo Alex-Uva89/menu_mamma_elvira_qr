@@ -7,16 +7,37 @@ img{
 .footer-dish{
     height: 70px;
     display: flex;
-    justify-content: center;
     align-items: center;
     margin-bottom: 10px;
     font-size: 2rem;
     padding: 10px 0;
 }
 
+.header-dish{
+    position: relative;
+}
+
+
+.footer-dish{
+    justify-content: center;
+}
+
 .header-dish img{
     height: 100%;
     margin-right: 10px;
+}
+
+.buttonBack{
+    position: absolute;
+    right: 10px;
+    top: 0;
+    color: var(--white);
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 20px 0;
 }
 
 .dish-info{

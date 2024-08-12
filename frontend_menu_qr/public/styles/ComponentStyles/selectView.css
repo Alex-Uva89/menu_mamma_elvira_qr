@@ -1,0 +1,32 @@
+.pill-button svg {
+    width: 20px;
+    height: 20px;
+    margin: 2px;
+    cursor: pointer;
+    color: var(--white);
+}
+
+.pill-button span{
+    color: var(--white);
+}
+
+.buttonList{
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    padding: 5px 10px;
+}
+.buttonListImg{
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    padding: 5px 10px;
+}
+
+.buttonListImg.active,
+.buttonList.active{
+    background: var(--white);
+}
+
+.buttonListImg.active svg,
+.buttonList.active svg{
+    color: var(--text-color);
+}

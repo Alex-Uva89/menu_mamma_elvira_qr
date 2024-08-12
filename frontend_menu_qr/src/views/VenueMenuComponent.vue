@@ -4,6 +4,8 @@
     <header-navigation :venuePath="venueName" 
       :categoryName="categoryName"
       @filter-allergen="handleFilterAllergen"
+      @update-open-list="handleUpdateOpenList"
+      @update-open-list-img="handleUpdateOpenListImg"
     />
   </header>
   <div class="venue">  
@@ -30,14 +32,16 @@
                 :to="{ name: 'viewDish', params: { id: dish.id } }" 
                 @click.native="storeDishData(dish, venueName, allergensDish)"
                 v-if="!allergensDish.some(allergen => allergen.dish_id === dish.id && selectedAllergens.some(selected => allergen.allergen_id === selected.id))">
-                  <card-dish :dish="dish" :venuePath="venueName" />
+                  <card-dish v-if="listImg" :dish="dish" :venuePath="venueName" />
+                  <list-dish v-if="list" :dish="dish" :venuePath="venueName" />
               </router-link>
             </template>
             <router-link 
             :to="{ name: 'viewDish', params: { id: dish.id } }" 
             @click.native="storeDishData(dish, venueName, allergensDish)" 
             v-else>
-              <card-dish :dish="dish" :venuePath="venueName" />
+              <card-dish v-if="listImg"  :dish="dish" :venuePath="venueName" />
+              <list-dish v-if="list" :dish="dish" :venuePath="venueName" />
             </router-link>
           </li>
           <li v-if="selectedAllergens && selectedAllergens.length > 0 && !categories.dishes.some(dish => !allergensDish.some(allergen => allergen.dish_id === dish.id && selectedAllergens.some(selected => allergen.allergen_id === selected.id)))">
@@ -72,6 +76,7 @@ import NavComponent from '../views/layout/NavMenu.vue';
 import HeaderComponent from '../views/layout/HeaderMenu.vue';
 import HeaderNavigation from '../views/layout/HeaderNav.vue';
 import CardDish from '../components/CardDish.vue';
+import ListDish from '../components/ListDish.vue';
 
 export default {
   name: 'VenueMenu',
@@ -85,7 +90,8 @@ export default {
     NavComponent,
     HeaderComponent,
     HeaderNavigation,
-    CardDish
+    CardDish,
+    ListDish
   },
   data() {
     return {
@@ -94,7 +100,9 @@ export default {
       categories: [],
       categoryName: '',
       selectedAllergens: [],
-      allergensDish: []
+      allergensDish: [],
+      list: true,
+      listImg: false
     };
   },
   mounted() {
@@ -138,6 +146,14 @@ export default {
         sessionStorage.setItem('dish', JSON.stringify(dish));
         sessionStorage.setItem('venueName', venueName);
         sessionStorage.setItem('allergensDish', JSON.stringify(allergen));
+      },
+      handleUpdateOpenList(value) {
+        this.list = value;
+        this.listImg = !value;
+      },
+      handleUpdateOpenListImg(value) {
+        this.listImg = value;
+        this.list = !value;
       }
   },
 };
