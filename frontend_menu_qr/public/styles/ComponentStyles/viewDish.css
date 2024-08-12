@@ -33,7 +33,13 @@ img{
     text-align: center;
     padding: 10px;
     color: var(--white);
-    font-family: var(--Decima)
+    font-family: var(--Decima);
+    margin-bottom: 5px;
+}
+
+.dish-info p + span{
+    font-family: var(--Decima);
+    margin-bottom: 10px;
 }
 
 .dish-info h1 {
