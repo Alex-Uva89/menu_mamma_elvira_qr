@@ -3,3 +3,5 @@
 @import './fonts.css';
 @import './ComponentStyles/cardDish.css';
 @import './ComponentStyles/viewDish.css';
+@import './ComponentStyles/selectView.css';
+@import './ComponentStyles/listDish.css';

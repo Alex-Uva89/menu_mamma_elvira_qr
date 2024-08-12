@@ -1,6 +1,8 @@
 <template>
     <div class="header-menu" :style="{ background: `var(--nav-${venuePath.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">
-        <HamburgerMenu :venuePath="venuePath" />
+        <router-link to="/">
+            <img src="../../../public/assets/mammaelvira_2024.svg" alt="Hamburger" class="hamburger" />
+        </router-link>
         <div class="logo">
             <!-- Logo del tuo sito -->
             <img :src="`/assets/${venuePath}.svg`" alt="Logo">
@@ -46,6 +48,15 @@ export default {
     align-items: center;
     padding: 5px 10px;
     height: 80px;
+}
+
+.hamburger {
+    width: 70px;
+    height: 50px;
+    padding: 5px 10px;
+    background-color: var(--white);
+    opacity: 0.8;
+    border-radius: 5px;
 }
 
 .logo{

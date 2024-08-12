@@ -1,6 +1,6 @@
 <template>
     <span>
-        <button class="pill-button" @click="toggleShowAllergens" style="color: var(--white); font-size: 14.5px;">
+        <button class="pill-button" @click="toggleShowAllergens" style="color: var(--white); font-size: 14.5px; padding: 9px 5px; width: 90px">
             {{ showAllergens ? 'applica' : 'allergeni' }}
         </button>
         <div v-if="showAllergens" class="allergens-modal" :style="{ background: `var(--header-${venuePath.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">

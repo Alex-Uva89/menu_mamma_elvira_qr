@@ -1,0 +1,46 @@
+.dish-list-container {
+    width: 90%;
+    margin: auto;
+    padding: 0;
+}
+
+.dish-list-item {
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.dish-list-item-details {
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+.dish-list-item-details .title-dish::first-letter{
+    text-transform: uppercase;
+}
+
+.dish-list-item-details .title-dish{
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-color);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.dish-list-item-details p{
+    font-size: 0.8rem;
+    color: var(--text-grey);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.dish-list-item-price{
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--text-color);
+}

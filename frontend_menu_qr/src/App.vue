@@ -56,14 +56,17 @@
     
   }
   .pill-button {
-  border: 1px solid var(--white);
-  color: var(--text-color);
-  padding: 5px 10px;
-  border-radius: 50px;
-  cursor: pointer;
-  font-family: var(--Decima);
-  font-size: 16px;
-  transition: background-color 0.3s;
+    border: 1px solid var(--white);
+    color: var(--text-color);
+    padding: 5px 10px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: var(--Decima);
+    font-size: 16px;
+    transition: background-color 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 

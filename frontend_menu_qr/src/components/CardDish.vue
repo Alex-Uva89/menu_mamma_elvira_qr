@@ -11,7 +11,7 @@
         </div>
         </div>
         <div class="price-tag" :style="{ background: `var(--nav-${venuePath.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">
-            {{ dish.price }} €
+          € {{ dish.price }} 
         </div>
     </div>
   </template>
