@@ -19,7 +19,8 @@ const routes = [
       props: route => {
         const dish = JSON.parse(sessionStorage.getItem('dish'));
         const venueName = sessionStorage.getItem('venueName');
-        return { id: route.params.id, dish, venueName };
+        const allergensDish = JSON.parse(sessionStorage.getItem('allergensDish'));
+        return { id: route.params.id, dish, venueName, allergensDish };
       }
   }
 ];

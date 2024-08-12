@@ -28,14 +28,14 @@
             <template v-if="selectedAllergens && selectedAllergens.length > 0">
               <router-link 
                 :to="{ name: 'viewDish', params: { id: dish.id } }" 
-                @click.native="storeDishData(dish, venueName)"
+                @click.native="storeDishData(dish, venueName, allergensDish)"
                 v-if="!allergensDish.some(allergen => allergen.dish_id === dish.id && selectedAllergens.some(selected => allergen.allergen_id === selected.id))">
                   <card-dish :dish="dish" :venuePath="venueName" />
               </router-link>
             </template>
             <router-link 
             :to="{ name: 'viewDish', params: { id: dish.id } }" 
-            @click.native="storeDishData(dish, venueName)" 
+            @click.native="storeDishData(dish, venueName, allergensDish)" 
             v-else>
               <card-dish :dish="dish" :venuePath="venueName" />
             </router-link>
@@ -134,9 +134,10 @@ export default {
       handleFilterAllergen(allergenId) {
         this.selectedAllergens = allergenId;
       },
-      storeDishData(dish, venueName) {
+      storeDishData(dish, venueName, allergen) {
         sessionStorage.setItem('dish', JSON.stringify(dish));
         sessionStorage.setItem('venueName', venueName);
+        sessionStorage.setItem('allergensDish', JSON.stringify(allergen));
       }
   },
 };
