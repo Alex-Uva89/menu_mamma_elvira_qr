@@ -3,6 +3,8 @@
     <header-component :venuePath="venueName" class="header" />
     <header-navigation :venuePath="venueName" 
       :categoryName="categoryName"
+      :list="list"
+      :listImg="listImg"
       @filter-allergen="handleFilterAllergen"
       @update-open-list="handleUpdateOpenList"
       @update-open-list-img="handleUpdateOpenListImg"
@@ -30,7 +32,7 @@
             <template v-if="selectedAllergens && selectedAllergens.length > 0">
               <router-link 
                 :to="{ name: 'viewDish', params: { id: dish.id } }" 
-                @click.native="storeDishData(dish, venueName, allergensDish)"
+                @click.native="storeDishData(dish, venueName, allergensDish, list, listImg)"
                 v-if="!allergensDish.some(allergen => allergen.dish_id === dish.id && selectedAllergens.some(selected => allergen.allergen_id === selected.id))">
                   <card-dish v-if="listImg" :dish="dish" :venuePath="venueName" />
                   <list-dish v-if="list" :dish="dish" :venuePath="venueName" />
@@ -38,7 +40,7 @@
             </template>
             <router-link 
             :to="{ name: 'viewDish', params: { id: dish.id } }" 
-            @click.native="storeDishData(dish, venueName, allergensDish)" 
+            @click.native="storeDishData(dish, venueName, allergensDish, list, listImg)" 
             v-else>
               <card-dish v-if="listImg"  :dish="dish" :venuePath="venueName" />
               <list-dish v-if="list" :dish="dish" :venuePath="venueName" />
@@ -80,6 +82,7 @@ import ListDish from '../components/ListDish.vue';
 
 export default {
   name: 'VenueMenu',
+  emits: ['view'],
   props: {
     venuePath: {
       type: String,
@@ -109,6 +112,19 @@ export default {
       this.venueName = this.$route.params.venue;
       this.fetchVenueData();
       this.fetchAllergensDish();
+
+      const storedList = sessionStorage.getItem('list');
+      const storedListImg = sessionStorage.getItem('listImg');
+
+      if (storedList) {
+        this.list = JSON.parse(storedList);
+        sessionStorage.removeItem('list');
+      }
+
+      if (storedListImg) {
+        this.listImg = JSON.parse(storedListImg);
+        sessionStorage.removeItem('listImg');
+      }
     },
     methods: {
       fetchVenueData() {
@@ -142,10 +158,12 @@ export default {
       handleFilterAllergen(allergenId) {
         this.selectedAllergens = allergenId;
       },
-      storeDishData(dish, venueName, allergen) {
+      storeDishData(dish, venueName, allergen, list, listImg) {
         sessionStorage.setItem('dish', JSON.stringify(dish));
         sessionStorage.setItem('venueName', venueName);
         sessionStorage.setItem('allergensDish', JSON.stringify(allergen));
+        sessionStorage.setItem('list', list);
+        sessionStorage.setItem('listImg', listImg);
       },
       handleUpdateOpenList(value) {
         this.list = value;

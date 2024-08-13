@@ -1,6 +1,6 @@
 <template>
-    <ul>
-        <li :style="{ borderBottom: `1px solid var(--nav-${venuePath.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">
+    <div>
+        <div :style="{ borderBottom: `1px solid var(--nav-${venuePath.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">
             <div class="dish-list-container">
                 <div class="dish-list-item">
                     <div class="dish-list-item-details">
@@ -12,8 +12,8 @@
                     </div>
                 </div>
             </div>
-        </li>
-    </ul>
+        </div>
+    </div>
 </template>
 
 <script>    

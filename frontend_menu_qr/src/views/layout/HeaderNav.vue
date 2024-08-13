@@ -1,7 +1,7 @@
 <template>
         <div :style="{ background: `var(--header-${venuePath.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">
             <div class="backgroundNav">
-                <select-view :openList="openList" :openListImg="openListImg" @openList="updateOpenList" @openListImg="updateOpenList" />
+                <select-view :list="list" :listImg="listImg" :openList="openList" :openListImg="openListImg" @openList="updateOpenList" @openListImg="updateOpenList" />
                 <span class="categoryName">
                     {{ categoryName }}
                 </span>
@@ -31,7 +31,15 @@ export default {
         categoryName: {
             type: String,
             required: true
-        }
+        },
+        list: {
+            type: Boolean,
+            required: true
+        },
+        listImg: {
+            type: Boolean,
+            required: true
+        },
     },
     components: {
         AllergensButton,

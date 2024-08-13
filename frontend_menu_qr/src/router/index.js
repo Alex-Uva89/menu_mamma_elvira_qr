@@ -11,6 +11,11 @@ const routes = [
   {
     path: '/:venue',
     component: VenueComponent,
+    props: route => {
+      const list = JSON.parse(sessionStorage.getItem('list'));
+      const listImg = JSON.parse(sessionStorage.getItem('listImg'));
+      return { venue: route.params.venue, list, listImg };
+    }
   },
   {
     path: '/dish/:id',
@@ -20,7 +25,9 @@ const routes = [
         const dish = JSON.parse(sessionStorage.getItem('dish'));
         const venueName = sessionStorage.getItem('venueName');
         const allergensDish = JSON.parse(sessionStorage.getItem('allergensDish'));
-        return { id: route.params.id, dish, venueName, allergensDish };
+        const list = JSON.parse(sessionStorage.getItem('list'));
+        const listImg = JSON.parse(sessionStorage.getItem('listImg'));
+        return { id: route.params.id, dish, venueName, allergensDish, list, listImg };
       }
   }
 ];
