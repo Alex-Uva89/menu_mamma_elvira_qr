@@ -1,7 +1,8 @@
 <template>
   <header>
     <header-component :venuePath="venueName" class="header" />
-    <header-navigation :venuePath="venueName" 
+    <header-navigation 
+      :venuePath="venueName" 
       :categoryName="categoryName"
       :list="list"
       :listImg="listImg"
@@ -13,13 +14,14 @@
   <div class="venue">  
     <template v-if="Array.isArray(categories)">
       <template v-for="category in categories" :key="category.id">
-        <div>
-          <ul v-if="category.is_drink && category.is_active">
-            <li>
+          <div v-if="category.is_drink && category.is_active" class="category-container">
+            <div class="categories-drink" :style="{ 
+              border: `5px solid var(--nav-${venueName.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})`,
+              background: `var(--header-${venueName.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})`
+            }">
               {{ category.name }}
-            </li>
-          </ul>
-        </div>
+            </div>
+          </div>
       </template>
     </template>
 
@@ -199,4 +201,25 @@ header{
 .footer {
   z-index: 0;
 }
+
+.category-container{
+  margin: 20px 0;
+  .categories-drink {
+      font-family: var(--Decima);
+      color: var(--white);
+      font-size: 1.5rem;
+      font-size: 1rem;
+      font-weight: bold;
+      margin: 10px 0;
+      height: 50px;
+      display: flex;
+      width: 90%;
+      margin: auto;
+      justify-content: center;
+      align-items: center;
+      text-transform: uppercase;
+  }
+}
+
+
 </style>

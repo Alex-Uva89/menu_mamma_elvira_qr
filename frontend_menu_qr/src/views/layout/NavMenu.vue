@@ -1,6 +1,6 @@
 <template>
 <nav :style="{ background: `var(--nav-${venuePath.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">      <ul>
-            <li v-if="showDrinks && hasVini" @click="sendDataWines">
+            <li v-if="showDrinks && hasViniEBolle" @click="sendDataWines">
                 <span class="categories">
                     VINI
                 </span>
@@ -17,11 +17,23 @@
                     DISTILLATI
                 </span>
             </li>
-            <li v-if="showDrinks && hasDrink"  @click="sendDataCocktails">
+            <li v-if="showDrinks && hasCocktails"  @click="sendDataCocktails">
                 <span class="categories">
                     COCKTAILS
                 </span>
             </li>
+            <li v-if="showDrinks && hasVermouth"  @click="sendDataVermouth">
+                <span class="categories">
+                    VERMOUTH    
+                </span>
+            </li>
+            <li v-if="showDrinks && hasBeer"  @click="sendDataBeer">
+                <span class="categories
+                ">
+                    BIRRE
+                </span>
+            </li>
+
             <li @click="toggleShowDrinks">
                 <span class="categories">
                     {{ showDrinks ? 'Show Food' : 'Show Beverages' }}
@@ -34,16 +46,6 @@
   <script>
   export default {
     name: 'NavMenu',
-    props: {
-        categories: {
-            type: Array,
-            required: true
-        },
-        venuePath: {
-            type: String,
-            required: true
-        }
-    },
     data() {
       return {
         showDrinks: false,
@@ -53,43 +55,88 @@
         foods: []
       };
     },
+    props: {
+      categories: {
+        type: Object,
+        required: true
+      },
+      venuePath: {
+        type: String,
+        required: true
+      }
+    },
+    computed: {
+          hasViniEBolle() {
+            const bolle = Object.values(this.categories).some(category => category.is_drink && category.name.toLowerCase().includes('bolle'));
+            const vini = Object.values(this.categories).some(category => category.is_drink && category.name.toLowerCase().includes('vini'));
+
+            if( bolle || vini ) {
+                return true;
+            }
+            return false;
+        },
+      hasCocktails() {
+        return Object.values(this.categories).some(category => category.is_drink && category.name.toLowerCase().includes('cocktails'));
+      },
+      hasDistillati() {
+        return Object.values(this.categories).some(category => category.is_drink && !category.name.toLowerCase().includes('vini') && !category.name.toLowerCase().includes('cocktails'));
+      },
+      hasVermouth() {
+        return Object.values(this.categories).some(category => category.is_drink && category.name.toLowerCase().includes('vermouth'));
+      },
+      hasBeer() {
+        return Object.values(this.categories).some(category => category.is_drink && category.name.toLowerCase().includes('birre'));
+      }
+    },
     methods: {
-        hasVini() {
-          return this.categories.some(category => category.is_drink && category.name.toLowerCase().includes('vini'));
-        },
-        hasDrink() {
-            return this.categories.some(category => category.is_drink && category.name.toLowerCase().includes('cocktails'));
-        },
-        hasDistillati() {
-            return this.categories.filter(category => category.is_drink && !category.name.toLowerCase().includes('vini') && !category.name.toLowerCase().includes('cocktails'));        
-        },
-        toggleShowDrinks() {
-            this.showDrinks = !this.showDrinks;
-        },
-        sendDataWines() {
-            this.wines = Object.values(this.categories)
-                .filter(category => category.is_drink && category.name.toLowerCase().includes('vini'));
-            this.$emit('update-category', this.wines);
-            this.$emit('category-name', 'Vini');
-        },
-        sendDataDistillati() {
-            this.distillati = Object.values(this.categories)
-                .filter(category => category.is_drink && !category.name.toLowerCase().includes('vini') && !category.name.toLowerCase().includes('cocktails'));
-            this.$emit('update-category', this.distillati);
-            this.$emit('category-name', 'Distillati');
-        
-        },
-        sendDataCocktails() {
-            this.cocktails = Object.values(this.categories)
-                .filter(category => category.is_drink && category.name.toLowerCase().includes('cocktails'));
-            this.$emit('update-category', this.cocktails);
-            this.$emit('category-name', 'Cocktails');
-        },
-        sendDataFood(category) {
-            this.foods = category;
-            this.$emit('update-category', this.foods);
-            this.$emit('category-name', category.name);
+      toggleShowDrinks() {
+        this.showDrinks = !this.showDrinks;
+      },
+      sendDataWines() {
+        const bolle = Object.values(this.categories).some(category => category.is_drink && category.name.toLowerCase().includes('bolle'));
+        const vini = Object.values(this.categories).some(category => category.is_drink && category.name.toLowerCase().includes('vini'));
+
+        if( bolle && vini ) {
+            this.wines = Object.values(this.categories).filter(category => category.is_drink && category.name.toLowerCase().includes('bolle') || category.name.toLowerCase().includes('vini'));
+        } else if( bolle ) {
+            this.wines = Object.values(this.categories).filter(category => category.is_drink && category.name.toLowerCase().includes('bolle'));
+        } else {
+            this.wines = Object.values(this.categories).filter(category => category.is_drink && category.name.toLowerCase().includes('vini'));
         }
+
+        this.$emit('update-category', this.wines);
+        this.$emit('category-name', 'Vini');
+      },
+      sendDataDistillati() {
+        this.distillati = Object.values(this.categories).filter(category => category.is_drink && !category.name.toLowerCase().includes('vini') && !category.name.toLowerCase().includes('cocktails') && !category.name.toLowerCase().includes('vermouth') && !category.name.toLowerCase().includes('bolle') && !category.name.toLowerCase().includes('birre'));
+        this.$emit('update-category', this.distillati);
+        this.$emit('category-name', 'Distillati');
+        console.log('DISTILLATI',this.distillati);
+      },
+      sendDataCocktails() {
+        this.cocktails = Object.values(this.categories).filter(category => category.is_drink && category.name.toLowerCase().includes('cocktails'));
+        this.$emit('update-category', this.cocktails);
+        this.$emit('category-name', 'Cocktails');
+        console.log('COCKTAILS',this.cocktails);
+      },
+      sendDataFood(category) {
+        this.foods = category;
+        this.$emit('update-category', this.foods);
+        this.$emit('category-name', category.name);
+        console.log('FOOD',this.foods);
+      },
+      sendDataVermouth() {
+        this.vermouth = Object.values(this.categories).filter(category => category.is_drink && category.name.toLowerCase().includes('vermouth'));
+        this.$emit('update-category', this.vermouth);
+        this.$emit('category-name', 'Vermouth');
+        console.log('VERMOUTH',this.vermouth);
+      },
+      sendDataBeer() {
+        this.beer = Object.values(this.categories).filter(category => category.is_drink && category.name.toLowerCase().includes('birre'));
+        this.$emit('update-category', this.beer);
+        this.$emit('category-name', 'Birre');
+        console.log('BIRRE',this.beer);
+      }
     }
   };
   </script>

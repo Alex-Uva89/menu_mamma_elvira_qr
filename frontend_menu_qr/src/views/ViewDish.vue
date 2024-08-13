@@ -8,8 +8,8 @@
       </button>
       <img :src="`/assets/${venueName}.svg`" alt="">
     </header>
-    <img :src="dish.image" alt="dish Image">
     <div class="dish-info">
+      <img :src="dish.image" alt="dish Image">
       <h1>{{ dish.name }}</h1>
       <p :style="{ background: `var(--nav-${venueName.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">Ingredienti</p>
       <span>{{ dish.description }}</span>
