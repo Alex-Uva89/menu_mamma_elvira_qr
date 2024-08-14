@@ -30,6 +30,9 @@ const routes = [
         return { id: route.params.id, dish, venueName, allergensDish, list, listImg };
       }
   }
+  // {
+  //   path: '/drink/:id
+  // }
 ];
 
 const router = createRouter({

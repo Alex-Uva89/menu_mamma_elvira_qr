@@ -13,18 +13,35 @@
   </header>
   <div class="venue">  
     <template v-if="Array.isArray(categories)">
-      <template v-for="category in categories" :key="category.id">
-          <div v-if="category.is_drink && category.is_active" class="category-container">
-            <div class="categories-drink" :style="{ 
-              border: `5px solid var(--nav-${venueName.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})`,
-              background: `var(--header-${venueName.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})`
-            }">
+      <template v-if="categories.some(category => category.is_drink && category.is_active && category.drinks.length > 0)">
+        <template v-for="category in categories" :key="category.id">
+          <div v-if="category.is_drink && category.is_active && category.drinks.length > 0" class="category-container">
+            <div
+              class="categories-drink" 
+              :style="{ 
+                  border: `5px solid var(--nav-${venueName.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})`,
+                  background: `var(--header-${venueName.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})`
+                }" 
+                @click="toggleCategory(category.id)">
               {{ category.name }}
             </div>
+            <ul v-if="isCategoryVisible(category.id)">
+              <li v-for="drink in category.drinks" :key="drink.id">
+                <span class="categories">
+                  <card v-if="listImg" :dish="drink" :venuePath="venueName" />
+                  <list v-if="list" :dish="drink" :venuePath="venueName" />
+                </span>
+              </li>
+            </ul>
           </div>
+        </template>
+      </template>
+
+      <!-- Mostra il messaggio se nessuna categoria ha drink disponibili -->
+      <template v-else>
+        <p class="absent">Non sono presenti prodotti nella categoria {{ categoryName }}</p>
       </template>
     </template>
-
     <template v-else>
       <div>
 
@@ -36,16 +53,16 @@
                 :to="{ name: 'viewDish', params: { id: dish.id } }" 
                 @click.native="storeDishData(dish, venueName, allergensDish, list, listImg)"
                 v-if="!allergensDish.some(allergen => allergen.dish_id === dish.id && selectedAllergens.some(selected => allergen.allergen_id === selected.id))">
-                  <card-dish v-if="listImg" :dish="dish" :venuePath="venueName" />
-                  <list-dish v-if="list" :dish="dish" :venuePath="venueName" />
+                  <card v-if="listImg" :dish="dish" :venuePath="venueName" />
+                  <list v-if="list" :dish="dish" :venuePath="venueName" />
               </router-link>
             </template>
             <router-link 
             :to="{ name: 'viewDish', params: { id: dish.id } }" 
             @click.native="storeDishData(dish, venueName, allergensDish, list, listImg)" 
             v-else>
-              <card-dish v-if="listImg"  :dish="dish" :venuePath="venueName" />
-              <list-dish v-if="list" :dish="dish" :venuePath="venueName" />
+              <card v-if="listImg"  :dish="dish" :venuePath="venueName" />
+              <list v-if="list" :dish="dish" :venuePath="venueName" />
             </router-link>
           </li>
           <li v-if="selectedAllergens && selectedAllergens.length > 0 && !categories.dishes.some(dish => !allergensDish.some(allergen => allergen.dish_id === dish.id && selectedAllergens.some(selected => allergen.allergen_id === selected.id)))">
@@ -79,8 +96,8 @@ import axios from 'axios';
 import NavComponent from '../views/layout/NavMenu.vue';
 import HeaderComponent from '../views/layout/HeaderMenu.vue';
 import HeaderNavigation from '../views/layout/HeaderNav.vue';
-import CardDish from '../components/CardDish.vue';
-import ListDish from '../components/ListDish.vue';
+import Card from '../components/CardDish.vue';
+import List from '../components/ListDish.vue';
 
 export default {
   name: 'VenueMenu',
@@ -95,8 +112,8 @@ export default {
     NavComponent,
     HeaderComponent,
     HeaderNavigation,
-    CardDish,
-    ListDish
+    Card,
+    List
   },
   data() {
     return {
@@ -107,7 +124,8 @@ export default {
       selectedAllergens: [],
       allergensDish: [],
       list: true,
-      listImg: false
+      listImg: false,
+      visibleCategories: []
     };
   },
   mounted() {
@@ -174,6 +192,18 @@ export default {
       handleUpdateOpenListImg(value) {
         this.listImg = value;
         this.list = !value;
+      },
+      toggleCategory(categoryId) {
+        const index = this.visibleCategories.indexOf(categoryId);
+        if (index > -1) {
+  
+          this.visibleCategories.splice(index, 1);
+        } else {
+          this.visibleCategories.push(categoryId);
+        }
+      },
+      isCategoryVisible(categoryId) {
+        return this.visibleCategories.includes(categoryId);
       }
   },
 };
@@ -219,6 +249,22 @@ header{
       align-items: center;
       text-transform: uppercase;
   }
+}
+
+.absent{
+  font-family: var(--Decima);
+  color: var(--text-color);
+  font-size: 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 10px 0;
+  height: calc(100vh - 300px);
+  display: flex;
+  width: 90%;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
 }
 
 

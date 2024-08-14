@@ -11,13 +11,17 @@
     <div class="dish-info">
       <img :src="dish.image" alt="dish Image">
       <h1>{{ dish.name }}</h1>
-      <p :style="{ background: `var(--nav-${venueName.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">Ingredienti</p>
+      <p v-if="dish.description != ''" :style="{ background: `var(--nav-${venueName.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">Ingredienti</p>
       <span>{{ dish.description }}</span>
-      <p :style="{ background: `var(--nav-${venueName.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">abbinamenti</p>
-      <span></span>
-      <p :style="{ background: `var(--nav-${venueName.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">i consigli della mamma</p>
-      <span></span>
-      <p :style="{ background: `var(--nav-${venueName.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }" class="allergens-dish">
+      <p v-if="pairings.length > 0" :style="{ background: `var(--nav-${venueName.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">abbinamenti</p>
+      <ul class="container-pairings">
+        <li v-for="pairing in pairings">
+          {{ pairing.name }}
+        </li>
+      </ul>
+      <!-- <p :style="{ background: `var(--nav-${venueName.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">i consigli della mamma</p>
+      <span></span> -->
+      <p v-if="filteredAllergens.length > 0" :style="{ background: `var(--nav-${venueName.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }" class="allergens-dish">
         allergeni
       </p>
       <ul class="allergens-list">
@@ -69,10 +73,12 @@ export default {
     return {
       allergens: [],
       list: this.list,
-      listImg: this.listImg
+      listImg: this.listImg,
+      pairings: []
     };
   },
   created() {
+    this.fetchPairing();
     this.fetchAllergens();
   },
   methods: {
@@ -80,6 +86,15 @@ export default {
       axios.get(`${process.env.VUE_APP_API_URL}/api/allergens`)
         .then(response => {
           this.allergens = response.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    fetchPairing() {
+      axios.get(`${process.env.VUE_APP_API_URL}/api/dishes/drinks/${this.id}`)
+      .then(response => {
+        this.pairings = response.data;
         })
         .catch(error => {
           console.log(error);

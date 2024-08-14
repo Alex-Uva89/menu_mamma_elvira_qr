@@ -64,9 +64,18 @@ img{
     margin-bottom: 5px;
 }
 
-.dish-info p + span{
+.dish-info .container-pairings li{
+    list-style: inside;
     font-family: var(--Decima);
     margin-bottom: 10px;
+}
+
+.container-pairings{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 0 20px;
 }
 
 .dish-info h1 {
@@ -107,3 +116,4 @@ img{
     border: none;
     cursor: pointer;
 }
+
