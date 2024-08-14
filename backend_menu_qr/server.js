@@ -66,7 +66,8 @@ app.get('/api/venues/:venue', (req, res) => {
         d.price AS dish_price,
         d.is_active AS dish_is_active,
         dr.id AS drink_id, 
-        dr.name AS drink_name
+        dr.name AS drink_name,
+        dr.price AS drink_price
     FROM venues v
     LEFT JOIN category_venue cv ON v.id = cv.venue_id
     LEFT JOIN categories c ON cv.category_id = c.id
@@ -111,7 +112,8 @@ app.get('/api/venues/:venue', (req, res) => {
       if (row.drink_id) {
         formattedResults.categories[row.category_id].drinks.push({
           id: row.drink_id,
-          name: row.drink_name
+          name: row.drink_name,
+          price: row.drink_price
         });
       }
     });
@@ -142,6 +144,27 @@ app.get('/api/dishes/allergens', (req, res) => {
     if (err) {
       console.error('Error retrieving dish allergens:', err);
       res.status(500).json({ error: 'Error retrieving dish allergens' });
+      return;
+    }
+
+    res.json(results);
+  });
+});
+
+app.get('/api/dishes/drinks/:id', (req, res) => {
+  const id = req.params.id; 
+  console.log(`Received request for dish_id: ${id}`);
+  const query = `
+    SELECT dd.dish_id, dd.drink_id, d.*
+    FROM dish_drink dd
+    JOIN drinks d ON dd.drink_id = d.id
+    WHERE dd.dish_id = ?
+  `;
+
+  connection.query(query, [id], (err, results) => {
+    if (err) {
+      console.error('Error retrieving drinks:', err);
+      res.status(500).json({ error: 'Error retrieving drinks' });
       return;
     }
 
