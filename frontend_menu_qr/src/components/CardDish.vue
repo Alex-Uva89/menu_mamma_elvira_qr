@@ -2,9 +2,9 @@
     <div class="dish-item">
       <div class="dish-container" :style="{ border: `1px solid var(--nav-${venuePath.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">
         <div class="dish-background" :style="{ background: `var(--nav-${venuePath.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }"></div>
-        <img :src="dish.image" alt="dish Image">
+        <img :src="dish.image === 'null' || !dish.image ? `assets/default_${venuePath}.jpg` : dish.image" alt="dish Image">        
         <div class="dish-details">
-            <h3>{{ dish.name }}</h3>
+          <h3>{{ dish.name }}</h3>
             <div>
                 <p>{{ dish.description }}</p>
             </div>

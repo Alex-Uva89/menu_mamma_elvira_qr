@@ -9,7 +9,7 @@
       <img :src="`/assets/${venueName}.svg`" alt="">
     </header>
     <div class="dish-info">
-      <img :src="dish.image" alt="dish Image">
+      <img :src="dish.image === 'null' ? `../assets/default_${venueName}.jpg` : dish.image" alt="dish Image">
       <h1>{{ dish.name }}</h1>
       <p v-if="dish.description != ''" :style="{ background: `var(--nav-${venueName.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">Ingredienti</p>
       <span>{{ dish.description }}</span>
