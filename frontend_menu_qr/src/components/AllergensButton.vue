@@ -82,7 +82,6 @@ export default {
 .allergens-modal {
     position: absolute;
     width: 100%;
-    height: calc(100vh - 140px);
     top: 139px;
     right: 0;
     color: var(--black);
@@ -94,6 +93,7 @@ export default {
     justify-content: space-between;
     align-items: center;
     padding-bottom: 20px;
+    height: calc(100vh - 140px);
     ul{
         margin:30px 10px;
         display: flex;
@@ -115,7 +115,7 @@ export default {
                 filter: contrast(1.5);
             }
             img{
-                width: 60px;
+                width: 40px;
             }
         }
     }
