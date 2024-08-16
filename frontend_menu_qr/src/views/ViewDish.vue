@@ -67,6 +67,10 @@ export default {
     },
     listImg: {
       type: Boolean,
+    },
+    categorySelected: {
+      type: Object,
+      required: true
     }
   },
   data() {
@@ -103,6 +107,7 @@ export default {
     sendView()  {
       sessionStorage.setItem('list', JSON.stringify(this.list));
       sessionStorage.setItem('listImg', JSON.stringify(this.listImg));
+      sessionStorage.setItem('categorySelected', JSON.stringify(this.categorySelected));
       window.history.back();
     }
   },
