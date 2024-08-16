@@ -93,7 +93,7 @@ export default {
     justify-content: space-between;
     align-items: center;
     padding-bottom: 20px;
-    height: calc(100vh - 140px);
+    height: calc(100vh - 160px);
     ul{
         margin: 10px;
         display: flex;
