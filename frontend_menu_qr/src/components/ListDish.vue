@@ -5,7 +5,6 @@
                 <div class="dish-list-item">
                     <div class="dish-list-item-details">
                         <h3 class="title-dish">{{ dish.name }}</h3>
-                        <p>{{ dish.description }}</p>
                     </div>
                     <div class="dish-list-item-price">
                         € {{ dish.price }}
