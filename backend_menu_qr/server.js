@@ -153,7 +153,6 @@ app.get('/api/dishes/allergens', (req, res) => {
 
 app.get('/api/dishes/drinks/:id', (req, res) => {
   const id = req.params.id; 
-  console.log(`Received request for dish_id: ${id}`);
   const query = `
     SELECT dd.dish_id, dd.drink_id, d.*
     FROM dish_drink dd

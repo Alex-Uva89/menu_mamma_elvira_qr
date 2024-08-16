@@ -24,7 +24,8 @@
       venuePath: {
         type: String,
         required: true
-      }
+      },
+    
     }
   }
   </script>

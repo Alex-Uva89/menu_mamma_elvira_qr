@@ -51,7 +51,7 @@
             <template v-if="selectedAllergens && selectedAllergens.length > 0">
               <router-link 
                 :to="{ name: 'viewDish', params: { id: dish.id } }" 
-                @click.native="storeDishData(dish, venueName, allergensDish, list, listImg)"
+                @click.native="storeDishData(dish, venueName, allergensDish, list, listImg, categories)"
                 v-if="!allergensDish.some(allergen => allergen.dish_id === dish.id && selectedAllergens.some(selected => allergen.allergen_id === selected.id))">
                   <card v-if="listImg" :dish="dish" :venuePath="venueName" />
                   <list v-if="list" :dish="dish" :venuePath="venueName" />
@@ -59,7 +59,7 @@
             </template>
             <router-link 
             :to="{ name: 'viewDish', params: { id: dish.id } }" 
-            @click.native="storeDishData(dish, venueName, allergensDish, list, listImg)" 
+            @click.native="storeDishData(dish, venueName, allergensDish, list, listImg, categories)" 
             v-else>
               <card v-if="listImg"  :dish="dish" :venuePath="venueName" />
               <list v-if="list" :dish="dish" :venuePath="venueName" />
@@ -126,16 +126,17 @@ export default {
       allergensDish: [],
       list: true,
       listImg: false,
-      visibleCategories: []
+      visibleCategories: [],
+      categorySelected: [],
     };
   },
   mounted() {
       this.venueName = this.$route.params.venue;
-      this.fetchVenueData();
       this.fetchAllergensDish();
-
+      
       const storedList = sessionStorage.getItem('list');
       const storedListImg = sessionStorage.getItem('listImg');
+      const storedCategory = sessionStorage.getItem('categorySelected');
 
       if (storedList) {
         this.list = JSON.parse(storedList);
@@ -146,6 +147,14 @@ export default {
         this.listImg = JSON.parse(storedListImg);
         sessionStorage.removeItem('listImg');
       }
+
+      if (storedCategory === null) {  
+        this.fetchVenueData();
+      } else {
+        this.categorySelected = JSON.parse(storedCategory);
+        this.fetchVenueData();
+        sessionStorage.removeItem('categorySelected');
+      }
     },
     methods: {
       fetchVenueData() {
@@ -153,7 +162,14 @@ export default {
         .then(response => {
           this.venue = response.data;
           const categoriesArray = Object.values(this.venue.categories);
-          this.categories = categoriesArray[0];
+          
+          if(this.categorySelected.length != 0) {
+            this.categories = this.categorySelected;
+   
+          } else {
+            this.categories = categoriesArray[0];
+          }
+
           this.categoryName = this.categories.name;
         })
         .catch(error => {
@@ -179,12 +195,13 @@ export default {
       handleFilterAllergen(allergenId) {
         this.selectedAllergens = allergenId;
       },
-      storeDishData(dish, venueName, allergen, list, listImg) {
+      storeDishData(dish, venueName, allergen, list, listImg, categoriesSel) {
         sessionStorage.setItem('dish', JSON.stringify(dish));
         sessionStorage.setItem('venueName', venueName);
         sessionStorage.setItem('allergensDish', JSON.stringify(allergen));
         sessionStorage.setItem('list', list);
         sessionStorage.setItem('listImg', listImg);
+        sessionStorage.setItem('categorySelected', JSON.stringify(categoriesSel));
       },
       handleUpdateOpenList(value) {
         this.list = value;

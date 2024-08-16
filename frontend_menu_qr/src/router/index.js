@@ -14,7 +14,8 @@ const routes = [
     props: route => {
       const list = JSON.parse(sessionStorage.getItem('list'));
       const listImg = JSON.parse(sessionStorage.getItem('listImg'));
-      return { venue: route.params.venue, list, listImg };
+      const categorySelected = JSON.parse(sessionStorage.getItem('categorySelected'));
+      return { venue: route.params.venue, list, listImg, categorySelected };
     }
   },
   {
@@ -27,7 +28,8 @@ const routes = [
         const allergensDish = JSON.parse(sessionStorage.getItem('allergensDish'));
         const list = JSON.parse(sessionStorage.getItem('list'));
         const listImg = JSON.parse(sessionStorage.getItem('listImg'));
-        return { id: route.params.id, dish, venueName, allergensDish, list, listImg };
+        const categorySelected = JSON.parse(sessionStorage.getItem('categorySelected'));
+        return { id: route.params.id, dish, venueName, allergensDish, list, listImg, categorySelected };
       }
   }
   // {
