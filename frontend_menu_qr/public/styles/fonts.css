@@ -31,3 +31,7 @@
 :root{
     --Decima: 'DecimaMonoPro',monospace;
 }
+
+*{
+    font-family: var(--Decima);
+}

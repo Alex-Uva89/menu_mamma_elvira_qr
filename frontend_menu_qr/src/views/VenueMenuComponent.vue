@@ -85,6 +85,7 @@
   <nav-component 
     :categories="venue.categories" 
     :venuePath="venueName" 
+    :categoryName="categoryName"
     class="footer"
     @update-category="handleUpdateCategory"
     @category-name="handleUpdateNameCategory"

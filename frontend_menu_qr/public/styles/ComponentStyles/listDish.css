@@ -25,9 +25,9 @@
 .dish-list-item-details .title-dish{
     font-size: 1rem;
     font-weight: 600;
+    line-height: 1;
     color: var(--text-color);
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    white-space: wrap;
     overflow: hidden;
 }
 
