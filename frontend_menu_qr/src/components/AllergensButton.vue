@@ -90,12 +90,12 @@ export default {
     z-index: 100;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     padding-bottom: 20px;
-    height: calc(100vh - 160px);
+    height: calc(100vh - 140px);
     ul{
-        margin: 10px;
+        margin: 0 10px;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
