@@ -5,9 +5,6 @@
         <img :src="dish.image === 'null' || !dish.image ? `assets/default_${venuePath}.jpg` : dish.image" alt="dish Image">        
         <div class="dish-details">
           <h3>{{ dish.name }}</h3>
-            <div>
-                <p>{{ dish.description }}</p>
-            </div>
         </div>
         </div>
         <div class="price-tag" :style="{ background: `var(--nav-${venuePath.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">
