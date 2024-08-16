@@ -95,7 +95,7 @@ export default {
     padding-bottom: 20px;
     height: calc(100vh - 140px);
     ul{
-        margin:30px 10px;
+        margin: 10px;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
