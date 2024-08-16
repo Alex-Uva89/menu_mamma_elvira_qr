@@ -1,47 +1,46 @@
 <template>
-<nav :style="{ background: `var(--nav-${venuePath.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">      <ul>
-            <li v-if="showDrinks && hasViniEBolle" @click="sendDataWines">
+<nav :style="{ background: `var(--nav-${venuePath.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">
+    <ul>
+        <li v-if="showDrinks && hasViniEBolle" @click="sendDataWines" :class="{ active: activeCategory === 'Vini' }">
+            <span class="categories">
+                VINI
+            </span>
+        </li>
+        <template v-for="category in categories" :key="category.id">
+            <li v-if="!category.is_drink && !showDrinks" class="categories" @click="sendDataFood(category)" :class="{ active: category.name === categoryName || activeCategory === category.name}">
                 <span class="categories">
-                    VINI
+                    {{ category.name }}
                 </span>
             </li>
-            <template v-for="category in categories" :key="category.id">
-                <li v-if="!category.is_drink && !showDrinks" class="categories" @click="sendDataFood(category)">
-                    <span class="categories">
-                        {{ category.name }}
-                    </span>
-                </li>
-            </template>
-            <li v-if="showDrinks && hasDistillati"  @click="sendDataDistillati">
-                <span class="categories">
-                    DISTILLATI
-                </span>
-            </li>
-            <li v-if="showDrinks && hasCocktails"  @click="sendDataCocktails">
-                <span class="categories">
-                    COCKTAILS
-                </span>
-            </li>
-            <li v-if="showDrinks && hasVermouth"  @click="sendDataVermouth">
-                <span class="categories">
-                    VERMOUTH    
-                </span>
-            </li>
-            <li v-if="showDrinks && hasBeer"  @click="sendDataBeer">
-                <span class="categories
-                ">
-                    BIRRE
-                </span>
-            </li>
-
-            <li @click="toggleShowDrinks">
-                <span class="categories">
-                    {{ showDrinks ? 'Show Food' : 'Show Beverages' }}
-                </span>
-            </li>
-      </ul>
-    </nav>
-  </template>
+        </template>
+        <li v-if="showDrinks && hasDistillati" @click="sendDataDistillati" :class="{ active: activeCategory === 'Distillati' }">
+            <span class="categories">
+                DISTILLATI
+            </span>
+        </li>
+        <li v-if="showDrinks && hasCocktails" @click="sendDataCocktails" :class="{ active: activeCategory === 'Cocktails' }">
+            <span class="categories">
+                COCKTAILS
+            </span>
+        </li>
+        <li v-if="showDrinks && hasVermouth" @click="sendDataVermouth" :class="{ active: activeCategory === 'Vermouth' }">
+            <span class="categories">
+                VERMOUTH    
+            </span>
+        </li>
+        <li v-if="showDrinks && hasBeer" @click="sendDataBeer" :class="{ active: activeCategory === 'Birre' }">
+            <span class="categories">
+                BIRRE
+            </span>
+        </li>
+        <li @click="toggleShowDrinks">
+            <span class="categories">
+                {{ showDrinks ? 'Show Food' : 'Show Beverages' }}
+            </span>
+        </li>
+    </ul>
+</nav>
+</template>
   
   <script>
   export default {
@@ -52,7 +51,8 @@
         wines: [],
         distillati: [],
         cocktails: [],
-        foods: []
+        foods: [],
+        activeCategory: this.categoryName,
       };
     },
     props: {
@@ -63,10 +63,14 @@
       venuePath: {
         type: String,
         required: true
+      },
+      categoryName: {
+        type: String,
+        required: true
       }
     },
     computed: {
-          hasViniEBolle() {
+      hasViniEBolle() {
             const bolle = Object.values(this.categories).some(category => category.is_drink && category.name.toLowerCase().includes('bolle'));
             const vini = Object.values(this.categories).some(category => category.is_drink && category.name.toLowerCase().includes('vini'));
 
@@ -74,7 +78,7 @@
                 return true;
             }
             return false;
-        },
+      },
       hasCocktails() {
         return Object.values(this.categories).some(category => category.is_drink && category.name.toLowerCase().includes('cocktails'));
       },
@@ -106,38 +110,39 @@
 
         this.$emit('update-category', this.wines);
         this.$emit('category-name', 'Vini');
+        this.activeCategory = 'Vini';
       },
       sendDataDistillati() {
         this.distillati = Object.values(this.categories).filter(category => category.is_drink && !category.name.toLowerCase().includes('vini') && !category.name.toLowerCase().includes('cocktails') && !category.name.toLowerCase().includes('vermouth') && !category.name.toLowerCase().includes('bolle') && !category.name.toLowerCase().includes('birre'));
         this.$emit('update-category', this.distillati);
         this.$emit('category-name', 'Distillati');
-        console.log('DISTILLATI',this.distillati);
+        this.activeCategory = 'Distillati';
       },
       sendDataCocktails() {
         this.cocktails = Object.values(this.categories).filter(category => category.is_drink && category.name.toLowerCase().includes('cocktails'));
         this.$emit('update-category', this.cocktails);
         this.$emit('category-name', 'Cocktails');
-        console.log('COCKTAILS',this.cocktails);
+        this.activeCategory = 'Cocktails';
       },
       sendDataFood(category) {
         this.foods = category;
         this.$emit('update-category', this.foods);
         this.$emit('category-name', category.name);
-        console.log('FOOD',this.foods);
+        this.activeCategory = category.name;
       },
       sendDataVermouth() {
         this.vermouth = Object.values(this.categories).filter(category => category.is_drink && category.name.toLowerCase().includes('vermouth'));
         this.$emit('update-category', this.vermouth);
         this.$emit('category-name', 'Vermouth');
-        console.log('VERMOUTH',this.vermouth);
+        this.activeCategory = 'Vermouth';
       },
       sendDataBeer() {
         this.beer = Object.values(this.categories).filter(category => category.is_drink && category.name.toLowerCase().includes('birre'));
         this.$emit('update-category', this.beer);
         this.$emit('category-name', 'Birre');
-        console.log('BIRRE',this.beer);
+        this.activeCategory = 'Birre';
       }
-    }
+    },
   };
   </script>
 
@@ -164,12 +169,16 @@ nav {
             cursor: pointer;
             display: flex;
             justify-content: center;
+            color: var(--white);
+            &.active{
+                background-color: var(--white);
+                color: var(--text-color);
+            }
         }
         li:last-child {
             width: 100%;
         }
         .categories{
-            color: var(--white);
             font-family: var(--Decima);
             font-size: 1rem;
             white-space: nowrap;
@@ -177,5 +186,6 @@ nav {
             overflow: hidden;
         }
     }
+
 }
 </style>

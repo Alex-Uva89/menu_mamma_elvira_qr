@@ -5,7 +5,7 @@
         </router-link>
         <div class="logo">
             <!-- Logo del tuo sito -->
-            <img :src="`/assets/${venuePath}.svg`" alt="Logo">
+            <img :src="`/assets/${venuePath}.svg`" alt="Logo" :style="{ background: venuePath === `'Scante` ? `var(--header-${venuePath.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` : '', padding: venuePath === `'Scante` ? '10px' : '' }">
         </div>
         <LanguageSwitch @language-changed="changeLanguage" />
     </div>
