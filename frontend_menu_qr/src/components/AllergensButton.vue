@@ -4,16 +4,18 @@
             {{ showAllergens ? 'applica' : 'allergeni' }}
         </button>
         <div v-if="showAllergens" class="allergens-modal" :style="{ background: `var(--header-${venuePath.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">
-            <ul>
-                <li v-for="allergen in allergens" :key="allergen.id" :id="allergen.id" :class="{'allergen': true, 'selected': isSelected(allergen)}" @click="filterAllergen(allergen)">
-                    <img :src="allergen.icon" alt="">
-                    {{ allergen.name }}
-                </li>
-            </ul>
-            <div class="allergenReset">
-                <button @click="resetAllergens">
-                    deseleziona tutti gli allergeni
-                </button>
+            <div>
+                <ul>
+                    <li v-for="allergen in allergens" :key="allergen.id" :id="allergen.id" :class="{'allergen': true, 'selected': isSelected(allergen)}" @click="filterAllergen(allergen)">
+                        <img :src="allergen.icon" alt="">
+                        {{ allergen.name }}
+                    </li>
+                </ul>
+                <div class="allergenReset">
+                    <button @click="resetAllergens">
+                        deseleziona tutti gli allergeni
+                    </button>
+                </div>
             </div>
             <div class="nb">NB. comunicare sempre allergeni allo staff</div>
         </div>
@@ -87,6 +89,11 @@ export default {
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
     ul{
         margin:30px 10px;
         display: flex;
@@ -113,8 +120,6 @@ export default {
         }
     }
     .nb {
-        position: fixed;
-        bottom: 50px;
         color: var(--text-color);
         font-size: .9rem;
         text-align: center;
