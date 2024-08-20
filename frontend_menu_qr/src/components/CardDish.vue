@@ -10,9 +10,13 @@
         <div v-if="!isDrink" class="price-tag" :style="{ background: `var(--nav-${venuePath.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">
           {{ dish.price }}
         </div>
-        <div v-if="isDrink" class="price-tag-drink" :style="{ background: `var(--nav-${venuePath.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">
-          <img width="24" height="24" src="https://img.icons8.com/material-sharp/24/bar.png" alt="bar" class="icon"/> {{ dish.price / 4 + 1 }} | <img src="https://img.icons8.com/ios-filled/50/wine.png" alt="wine" class="icon"/> {{ dish.price }} | <img width="50" height="50" src="https://img.icons8.com/ios-filled/50/shopping-bag.png" alt="shopping-bag" class="icon"/> {{ dish.price - ( dish.price / 4) }}
+        <div v-if="isDrink && isWine" class="price-tag-drink" :style="{ background: `var(--nav-${venuePath.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">
+          <img width="24" height="24" src="https://img.icons8.com/material-sharp/24/bar.png" alt="bar" class="icon"/> {{ Math.ceil(dish.price / 4 + 1) }} | <img src="https://img.icons8.com/ios-filled/50/wine.png" alt="wine" class="icon"/> {{ dish.price }} | <img width="50" height="50" src="https://img.icons8.com/ios-filled/50/shopping-bag.png" alt="shopping-bag" class="icon"/> {{ dish.price - ( Math.ceil(dish.price / 4 + 1)) }}
         </div>
+        <div v-if="isDrink && !isWine" class="price-tag-drink" :style="{ background: `var(--nav-${venuePath.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">
+          {{ dish.price }}
+        </div>
+
     </div>
   </template>
   
@@ -32,7 +36,10 @@
         type: Boolean,
         required: true
       },
-      
+      isWine: {
+        type: Boolean,
+        required: true
+      }
     }
   }
   </script>
