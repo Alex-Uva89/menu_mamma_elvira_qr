@@ -28,8 +28,8 @@
             <ul v-if="isCategoryVisible(category.id)">
               <li v-for="drink in category.drinks" :key="drink.id">
                 <span class="categories">
-                  <card v-if="listImg" :dish="drink" :venuePath="venueName" :isDrink="category.is_drink" />
-                  <list v-if="list" :dish="drink" :venuePath="venueName" :isDrink="category.is_drink" />
+                  <card v-if="listImg" :dish="drink" :venuePath="venueName" :isDrink="category.is_drink" :isWine="category.name.toLowerCase().includes('vini')" />
+                  <list v-if="list" :dish="drink" :venuePath="venueName" :isDrink="category.is_drink" :isWine="category.name.toLowerCase().includes('vini')" />
                 </span>
               </li>
             </ul>
