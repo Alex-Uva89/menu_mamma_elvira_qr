@@ -56,14 +56,15 @@
     margin: 0 0 20px;
   }
 
-  .price-tag{
+  .price-tag,
+  .price-tag-drink{
     position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
     bottom: -20px;
     right: -30px;
-    width: 50px;
+    min-width: 50px;
     height: 40px;
     color: white;
     display: flex;
@@ -72,6 +73,17 @@
     font-size: 18px;
     font-weight: bold;
     border-radius: 5px;
-   
+    padding: 0 5px;
   }
+
+  .dish-item img.icon{
+    width: 20px;
+    height: 20px;
+  }
+
+  .price-tag-drink{
+    font-size: 0.9rem;
+    font-weight: 600;
+    word-spacing: -5px;
+}
   
