@@ -55,10 +55,12 @@
 }
 
 .dish-list-item-price-drink{
+    width: 100%;
     font-size: 0.9rem;
     font-weight: 600;
     word-spacing: -5px;
     color: var(--text-color);
+    text-align: end;
 }
 
 .dish-list-item-price-drink img.icon{
