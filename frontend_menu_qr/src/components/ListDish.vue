@@ -9,11 +9,11 @@
           <div v-if="!isDrink" class="dish-list-item-price">
              {{ dish.price }}
           </div>
-          <div v-if="isDrink" class="dish-list-item-price-drink">
-            <img width="24" height="24" src="https://img.icons8.com/material-sharp/24/bar.png" alt="bar" class="icon"/> {{ dish.price / 4 + 1 }} | <img src="https://img.icons8.com/ios-filled/50/wine.png" alt="wine" class="icon"/> {{ dish.price }} | <img width="50" height="50" src="https://img.icons8.com/ios-filled/50/shopping-bag.png" alt="shopping-bag" class="icon"/> {{ dish.price - ( dish.price / 4) }}
-          </div>
           <div v-if="dish.description" class="dish-list-item-description">
             {{  dish.description }}
+          </div>
+          <div v-if="isDrink" class="dish-list-item-price-drink">
+            <img width="24" height="24" src="https://img.icons8.com/material-sharp/24/bar.png" alt="bar" class="icon"/> {{ dish.price / 4 + 1 }} | <img src="https://img.icons8.com/ios-filled/50/wine.png" alt="wine" class="icon"/> {{ dish.price }} | <img width="50" height="50" src="https://img.icons8.com/ios-filled/50/shopping-bag.png" alt="shopping-bag" class="icon"/> {{ dish.price - ( dish.price / 4) }}
           </div>
         </div>
       </div>
