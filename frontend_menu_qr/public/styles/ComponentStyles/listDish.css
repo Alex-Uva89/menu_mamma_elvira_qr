@@ -1,5 +1,5 @@
 .border-container{
-    padding-bottom: 20px;
+    padding-bottom: 40px;
 }
 
 .dish-list-container {
@@ -15,6 +15,7 @@
     align-items: center;
     padding: 10px;
     flex-wrap: wrap;
+    gap: 10px;
 }
 
 .dish-list-item-details {
@@ -80,3 +81,22 @@
     width: 20px;
     height: 20px;
   }
+
+.title-drink{
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-color);
+    white-space: wrap;
+    overflow: hidden;
+} 
+
+.title-drink .title-name{
+    text-transform: capitalize;
+}
+
+.title-description{
+    font-size: 0.8rem;
+    color: var(--text-grey);
+    white-space: wrap;
+    overflow: hidden;
+}
