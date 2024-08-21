@@ -67,7 +67,10 @@ app.get('/api/venues/:venue', (req, res) => {
         d.is_active AS dish_is_active,
         dr.id AS drink_id, 
         dr.name AS drink_name,
-        dr.price AS drink_price
+        dr.price AS drink_price,
+        dr.grape_variety AS drink_grape_variety,
+        dr.producer AS drink_producer,
+        dr.vintage AS drink_vintage
     FROM venues v
     LEFT JOIN category_venue cv ON v.id = cv.venue_id
     LEFT JOIN categories c ON cv.category_id = c.id
@@ -113,7 +116,10 @@ app.get('/api/venues/:venue', (req, res) => {
         formattedResults.categories[row.category_id].drinks.push({
           id: row.drink_id,
           name: row.drink_name,
-          price: row.drink_price
+          price: row.drink_price,
+          grape_variety: row.drink_grape_variety,
+          producer: row.drink_producer,
+          vintage: row.drink_vintage
         });
       }
     });
