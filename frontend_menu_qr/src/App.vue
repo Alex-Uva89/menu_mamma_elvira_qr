@@ -15,6 +15,7 @@
   width: 100%;
   background-color: var(--mamma-stone);
   overflow: auto;
+  scrollbar-width: none;
   .home-title{
     height: 100px;
     display: flex;
@@ -22,7 +23,6 @@
     align-items: flex-end;
     font-family: var(--Decima); 
     font-size: 2rem;
-    text-transform: uppercase;
     margin-bottom:10px;
   }
   .home-link{
@@ -33,8 +33,7 @@
     align-items: center;
     gap: 10px;
     a {
-        width: 60vw ;
-        padding: 30px;
+        width: 60%;
         border: 1px solid #000;
         border-radius: 5px;
         text-decoration: none;
@@ -70,6 +69,17 @@
   }
 }
 
+@media screen and (min-width: 768px) {
+  #app{
+    background-color: var(--mamma-stone-dark);
+  }
+  .home{
+    width: 30vw;
+    margin: 0 auto;
+    border: 3px solid #000;
+    box-shadow: 0 0 20px rgba(0,0,0,0.9);
+  }
+}
 
 </style>
 

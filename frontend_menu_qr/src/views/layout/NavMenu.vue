@@ -171,7 +171,7 @@ nav {
             justify-content: center;
             color: var(--white);
             &.active{
-                background-color: var(--white);
+                background-color: var(--button-hover);
                 color: var(--text-color);
             }
         }
@@ -187,5 +187,12 @@ nav {
         }
     }
 
+}
+
+@media screen and (min-width: 768px) {
+    nav {
+        width: 29.7vw;
+    }
+  
 }
 </style>

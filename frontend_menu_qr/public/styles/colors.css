@@ -1,12 +1,15 @@
 :root{
     --mamma-stone: rgb(234, 227, 216);
+    --mamma-stone-dark: rgb(235, 222, 204);
     --nav-La-Cucina: rgb(107, 114, 56);
-    --nav-Enoteca: rgb(165, 26, 26);
+    --nav-Enoteca: rgb(178,34,34);
     --nav-Scante: rgb(177, 59, 29);
     --white: rgb(255, 255, 255);
     --text-color: rgb(0, 0, 0);
     --header-La-Cucina: rgb(170, 170, 136);
-    --header-Enoteca: rgb(204, 102, 102);
+    --header-Enoteca: rgb(178, 102, 102);
     --header-Scante: rgb(177, 174, 172);
     --text-grey: rgb(128, 128, 128);
+    --button-hover: rgba(255, 255, 255, 0.575);
+
 }
