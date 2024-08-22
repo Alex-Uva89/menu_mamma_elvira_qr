@@ -265,7 +265,6 @@ header{
       margin: auto;
       justify-content: center;
       align-items: center;
-      text-transform: uppercase;
   }
 }
 

@@ -37,10 +37,6 @@
     text-transform: capitalize;
 }
 
-.dish-list-item-details .title-dish::first-letter{
-    text-transform: uppercase;
-}
-
 .dish-list-item-details .title-dish{
     font-size: 1rem;
     font-weight: 600;
@@ -65,7 +61,7 @@
 }
 
 .dish-list-item-price-drink{
-    flex: 1 1 50%;
+    flex: 1 1 40%;
     font-size: 0.9rem;
     font-weight: 600;
     word-spacing: -5px;
