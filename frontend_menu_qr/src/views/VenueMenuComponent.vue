@@ -11,6 +11,7 @@
       @update-open-list-img="handleUpdateOpenListImg"
     />
   </header>
+  
   <div class="venue">  
     <template v-if="Array.isArray(categories)">
       <template v-if="categories.some(category => category.is_drink && category.is_active && category.drinks.length > 0)">
