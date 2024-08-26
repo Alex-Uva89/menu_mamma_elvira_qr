@@ -4,7 +4,7 @@
         <div class="dish-background" :style="{ background: `var(--nav-${venuePath.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }"></div>
         <img :src="dish.image === 'null' || !dish.image ? `assets/default_${venuePath}.jpg` : dish.image" alt="dish Image">        
         <div class="dish-details">
-          <h3>{{ dish.name }}</h3>
+          <h3>{{ language === 'it'? dish.name : dish.name_en }}</h3>
         </div>
         </div>
         <div v-if="!isDrink" class="price-tag" :style="{ background: `var(--nav-${venuePath.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">
@@ -38,6 +38,10 @@
       },
       isWine: {
         type: Boolean,
+        required: true
+      },
+      language: {
+        type: String,
         required: true
       }
     }

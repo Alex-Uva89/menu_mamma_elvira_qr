@@ -1,23 +1,23 @@
 <template>
     <span>
         <button class="pill-button" @click="toggleShowAllergens" style="color: var(--white); font-size: 14.5px; padding: 9px 5px; width: 90px">
-            {{ showAllergens ? 'applica' : 'allergeni' }}
+            {{ allergenText }}
         </button>
         <div v-if="showAllergens" class="allergens-modal" :style="{ background: `var(--header-${venuePath.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">
             <div>
                 <ul>
                     <li v-for="allergen in allergens" :key="allergen.id" :id="allergen.id" :class="{'allergen': true, 'selected': isSelected(allergen)}" @click="filterAllergen(allergen)">
                         <img :src="allergen.icon" alt="">
-                        {{ allergen.name }}
+                        {{ language === 'it' ? allergen.name : allergen.name_en }}
                     </li>
                 </ul>
                 <div class="allergenReset">
                     <button @click="resetAllergens">
-                        deseleziona tutti gli allergeni
+                        {{ language === 'it' ? 'deseleziona tutti gli allergeni' : 'deselect all allergens' }}
                     </button>
                 </div>
             </div>
-            <div class="nb">NB. comunicare sempre allergeni allo staff</div>
+            <div class="nb">{{ language === 'it'? 'NB. comunicare sempre allergeni allo staff' : 'NB. always communicate allergens to the staff' }}</div>
         </div>
     </span>
 </template>
@@ -31,13 +31,17 @@ export default {
         venuePath: {
             type: String,
             required: true
+        },
+        language: {
+            type: String,
+            required: true
         }
     },
     data() {
         return {
             showAllergens: false,
             allergens: [],
-            selectedAllergens: []
+            selectedAllergens: [],
         };
     },
     mounted() {
@@ -73,7 +77,16 @@ export default {
             this.$emit('filter-allergen', this.selectedAllergens);
         }
     },
-    
+    computed: {
+        allergenText() {
+            switch (this.language) {
+                case 'it':
+                return this.showAllergens ? 'applica' : 'allergeni';
+                default:
+                return this.showAllergens ? 'apply' : 'allergens';
+            }
+        }
+    }
 }
 </script>
 

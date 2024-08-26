@@ -20,7 +20,7 @@
   }
   
   .dish-details {
-    height: 150px;
+    height: 100%;
     width: 50%;
     padding: 10px;
     flex-grow: 1;
@@ -28,6 +28,9 @@
     bottom: 0%;
     right: 0%;
     color: var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .dish-details div{
