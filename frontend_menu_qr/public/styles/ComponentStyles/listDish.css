@@ -34,7 +34,7 @@
     font-size: 0.8rem;
     color: var(--text-grey);
     white-space: wrap;
-    text-transform: capitalize;
+    word-spacing: -3px;
 }
 
 .dish-list-item-details .title-dish{
@@ -67,6 +67,9 @@
     word-spacing: -5px;
     color: var(--text-color);
     text-align: end;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
 }
 
 .dish-list-item-price-drink:only-child{

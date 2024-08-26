@@ -25,14 +25,13 @@
                   background: `var(--header-${venueName.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})`
                 }" 
                 @click="toggleCategory(category.id)">
-                blu
               {{ currentLanguage === 'it'? category.name : category.name_en }}
             </div>
             <ul v-if="isCategoryVisible(category.id)">
               <li v-for="drink in category.drinks" :key="drink.id">
                 <span class="categories">
-                  <card v-if="listImg" :dish="drink" :venuePath="venueName" :isDrink="category.is_drink" :isWine="category.name.toLowerCase().includes('vini')" />
-                  <list v-if="list" :dish="drink" :venuePath="venueName" :isDrink="category.is_drink" :isWine="category.name.toLowerCase().includes('vini')" />
+                  <card v-if="listImg" :language="currentLanguage" :dish="drink" :venuePath="venueName" :isDrink="category.is_drink" :isWine="category.name.toLowerCase().includes('vini')" />
+                  <list v-if="list" :language="currentLanguage" :dish="drink" :venuePath="venueName" :isDrink="category.is_drink" :isWine="category.name.toLowerCase().includes('vini')" />
                 </span>
               </li>
             </ul>
@@ -56,15 +55,15 @@
                 :to="{ name: 'viewDish', params: { id: dish.id } }" 
                 @click.native="storeDishData(dish, venueName, allergensDish, list, listImg, categories)"
                 v-if="!allergensDish.some(allergen => allergen.dish_id === dish.id && selectedAllergens.some(selected => allergen.allergen_id === selected.id))">
-                  <card v-if="listImg" :dish="dish" :venuePath="venueName" />
-                  <list v-if="list" :dish="dish" :venuePath="venueName" />
+                  <card v-if="listImg" :language="currentLanguage" :dish="dish" :venuePath="venueName" />
+                  <list v-if="list" :language="currentLanguage" :dish="dish" :venuePath="venueName" />
               </router-link>
             </template>
             <router-link 
             :to="{ name: 'viewDish', params: { id: dish.id } }" 
             @click.native="storeDishData(dish, venueName, allergensDish, list, listImg, categories)" 
             v-else>
-              <card v-if="listImg"  :dish="dish" :venuePath="venueName" />
+              <card v-if="listImg" :language="currentLanguage" :dish="dish" :venuePath="venueName" />
               <list v-if="list" :language="currentLanguage" :dish="dish" :venuePath="venueName" />
             </router-link>
           </li>

@@ -3,7 +3,7 @@
             <div class="backgroundNav">
                 <select-view :list="list" :listImg="listImg" :openList="openList" :openListImg="openListImg" @openList="updateOpenList" @openListImg="updateOpenList" />
                 <span class="categoryName">
-                    {{ language === 'it'? categoryName : categoryName_en }}
+                    {{ categoryText }}
                 </span>
                 <AllergensButton :language="language" :venuePath="venuePath" @filter-allergen="handleFilterAllergen" />
             </div>
@@ -79,6 +79,25 @@ export default {
             this.$emit('update-open-list', !value);
         }
     },
+    computed: {
+        categoryText() {
+            console.log(this.categoryName);
+            switch (this.categoryName) {
+                case 'Vini':
+                    return this.language === 'it' ? 'Vini' : 'Wines';
+                case 'Distillati':  
+                    return this.language === 'it' ? 'Distillati' : 'Distillates';
+                case 'Birre':
+                    return this.language === 'it' ? 'Birre' : 'Beers';
+                case 'Cocktails':
+                    return  'Cocktails';
+                case 'Vermouth':
+                    return 'Vermouth';
+                default:
+                    return this.language === 'it' ? this.categoryName : this.categoryName_en;
+            }
+        }
+    }
 }
 
 </script>

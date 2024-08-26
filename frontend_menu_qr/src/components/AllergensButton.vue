@@ -8,16 +8,16 @@
                 <ul>
                     <li v-for="allergen in allergens" :key="allergen.id" :id="allergen.id" :class="{'allergen': true, 'selected': isSelected(allergen)}" @click="filterAllergen(allergen)">
                         <img :src="allergen.icon" alt="">
-                        {{ allergen.name }}
+                        {{ language === 'it' ? allergen.name : allergen.name_en }}
                     </li>
                 </ul>
                 <div class="allergenReset">
                     <button @click="resetAllergens">
-                        deseleziona tutti gli allergeni
+                        {{ language === 'it' ? 'deseleziona tutti gli allergeni' : 'deselect all allergens' }}
                     </button>
                 </div>
             </div>
-            <div class="nb">NB. comunicare sempre allergeni allo staff</div>
+            <div class="nb">{{ language === 'it'? 'NB. comunicare sempre allergeni allo staff' : 'NB. always communicate allergens to the staff' }}</div>
         </div>
     </span>
 </template>
