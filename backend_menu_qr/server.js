@@ -57,10 +57,12 @@ app.get('/api/venues/:venue', (req, res) => {
         v.name AS venue_name,
         c.id AS category_id, 
         c.name AS category_name, 
+        c.name_en AS category_name_en,
         c.is_active AS category_is_active,
         c.is_drink AS category_is_drink,
         d.id AS dish_id, 
         d.name AS dish_name, 
+        d.name_en AS dish_name_en,
         d.image AS dish_image,
         d.description AS dish_description,
         d.price AS dish_price,
@@ -96,6 +98,7 @@ app.get('/api/venues/:venue', (req, res) => {
         formattedResults.categories[row.category_id] = {
           id: row.category_id,
           name: row.category_name,
+          name_en: row.category_name_en,
           is_active: row.category_is_active,
           is_drink: row.category_is_drink,
           dishes: [],
@@ -106,6 +109,7 @@ app.get('/api/venues/:venue', (req, res) => {
         formattedResults.categories[row.category_id].dishes.push({
           id: row.dish_id,
           name: row.dish_name,
+          name_en: row.dish_name_en,
           image: row.dish_image,
           description: row.dish_description,
           price: row.dish_price,

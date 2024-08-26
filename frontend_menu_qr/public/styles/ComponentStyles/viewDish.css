@@ -64,7 +64,7 @@ img{
 }
 
 .dish-info .container-pairings li{
-    list-style: inside;
+    list-style: none;
     font-family: var(--Decima);
     margin-bottom: 10px;
 }

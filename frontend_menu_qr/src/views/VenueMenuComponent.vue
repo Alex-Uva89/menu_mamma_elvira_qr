@@ -1,9 +1,11 @@
 <template>
   <header>
-    <header-component :venuePath="venueName" class="header" />
+    <header-component :venuePath="venueName" @language-changed="handleLanguage" class="header" />
     <header-navigation 
+      :language="currentLanguage"
       :venuePath="venueName" 
       :categoryName="categoryName"
+      :categoryName_en="categoryName_en"
       :list="list"
       :listImg="listImg"
       @filter-allergen="handleFilterAllergen"
@@ -11,7 +13,6 @@
       @update-open-list-img="handleUpdateOpenListImg"
     />
   </header>
-  
   <div class="venue">  
     <template v-if="Array.isArray(categories)">
       <template v-if="categories.some(category => category.is_drink && category.is_active && category.drinks.length > 0)">
@@ -24,7 +25,8 @@
                   background: `var(--header-${venueName.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})`
                 }" 
                 @click="toggleCategory(category.id)">
-              {{ category.name }}
+                blu
+              {{ currentLanguage === 'it'? category.name : category.name_en }}
             </div>
             <ul v-if="isCategoryVisible(category.id)">
               <li v-for="drink in category.drinks" :key="drink.id">
@@ -63,7 +65,7 @@
             @click.native="storeDishData(dish, venueName, allergensDish, list, listImg, categories)" 
             v-else>
               <card v-if="listImg"  :dish="dish" :venuePath="venueName" />
-              <list v-if="list" :dish="dish" :venuePath="venueName" />
+              <list v-if="list" :language="currentLanguage" :dish="dish" :venuePath="venueName" />
             </router-link>
           </li>
           <li v-if="selectedAllergens && selectedAllergens.length > 0 && !categories.dishes.some(dish => !allergensDish.some(allergen => allergen.dish_id === dish.id && selectedAllergens.some(selected => allergen.allergen_id === selected.id)))">
@@ -84,10 +86,10 @@
     
   </div>
   <nav-component 
+    :language="currentLanguage"
     :categories="venue.categories" 
     :venuePath="venueName" 
     :categoryName="categoryName"
-    class="footer"
     @update-category="handleUpdateCategory"
     @category-name="handleUpdateNameCategory"
   />
@@ -123,12 +125,14 @@ export default {
       venueName: '',
       categories: [],
       categoryName: '',
+      categoryName_en: '',
       selectedAllergens: [],
       allergensDish: [],
       list: true,
       listImg: false,
       visibleCategories: [],
       categorySelected: [],
+      currentLanguage: 'it'
     };
   },
   mounted() {
@@ -172,6 +176,7 @@ export default {
           }
 
           this.categoryName = this.categories.name;
+          this.categoryName_en = this.categories.name_en;
         })
         .catch(error => {
           console.error('Errore durante il recupero dei dati del locale:', error);
@@ -195,6 +200,9 @@ export default {
       },
       handleFilterAllergen(allergenId) {
         this.selectedAllergens = allergenId;
+      },
+      handleLanguage(language) {
+        this.currentLanguage = language;
       },
       storeDishData(dish, venueName, allergen, list, listImg, categoriesSel) {
         sessionStorage.setItem('dish', JSON.stringify(dish));
@@ -247,9 +255,9 @@ header{
   scrollbar-width: none;
 }
 
-.footer {
+/* .footer {
   z-index: 0;
-}
+} */
 
 .category-container{
   margin: 20px 0;

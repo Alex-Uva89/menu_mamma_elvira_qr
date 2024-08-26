@@ -1,26 +1,26 @@
 <template>
 <nav :style="{ background: `var(--nav-${venuePath.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">
     <ul>
-        <li v-if="showDrinks && hasViniEBolle" @click="sendDataWines" :class="{ active: activeCategory === 'Vini' }">
-            <span class="categories">
-                VINI
-            </span>
-        </li>
-        <template v-for="category in categories" :key="category.id">
+      <li v-if="showDrinks && hasViniEBolle" @click="sendDataWines" :class="{ active: activeCategory === 'Vini' }">
+        <span class="categories">
+          {{ language === 'it'? 'Vini' : 'Wines' }}
+        </span>
+      </li>
+      <template v-for="category in categories" :key="category.id">
             <li v-if="!category.is_drink && !showDrinks" class="categories" @click="sendDataFood(category)" :class="{ active: category.name === categoryName || activeCategory === category.name}">
-                <span class="categories">
-                    {{ category.name }}
+              <span class="categories">
+                    {{ language === 'it'? category.name : category.name_en }}
                 </span>
             </li>
         </template>
         <li v-if="showDrinks && hasDistillati" @click="sendDataDistillati" :class="{ active: activeCategory === 'Distillati' }">
             <span class="categories">
-                DISTILLATI
+                {{ language === 'it'? 'Distillati' : 'Distillates'  }}
             </span>
         </li>
         <li v-if="showDrinks && hasCocktails" @click="sendDataCocktails" :class="{ active: activeCategory === 'Cocktails' }">
             <span class="categories">
-                COCKTAILS
+                cocktails
             </span>
         </li>
         <li v-if="showDrinks && hasVermouth" @click="sendDataVermouth" :class="{ active: activeCategory === 'Vermouth' }">
@@ -30,12 +30,12 @@
         </li>
         <li v-if="showDrinks && hasBeer" @click="sendDataBeer" :class="{ active: activeCategory === 'Birre' }">
             <span class="categories">
-                BIRRE
+                {{ language === 'it'? 'Birre' : 'Beers' }}
             </span>
         </li>
         <li @click="toggleShowDrinks">
             <span class="categories">
-                {{ showDrinks ? 'Show Food' : 'Show Beverages' }}
+                {{ textSee }}
             </span>
         </li>
     </ul>
@@ -67,6 +67,10 @@
       categoryName: {
         type: String,
         required: true
+      },
+      language: {
+        type: String,
+        required: true
       }
     },
     computed: {
@@ -90,6 +94,16 @@
       },
       hasBeer() {
         return Object.values(this.categories).some(category => category.is_drink && category.name.toLowerCase().includes('birre'));
+      },
+      textSee() {
+        switch (this.language) {
+          case 'it':
+            return this.showDrinks ? 'Mostra cibo' : 'Mostra bevande';
+          case 'en':
+            return this.showDrinks ? 'See food' : 'See drinks';
+          default:
+            return this.showDrinks ? 'Vedi cibo' : 'Vedi bevande';
+        }
       }
     },
     methods: {

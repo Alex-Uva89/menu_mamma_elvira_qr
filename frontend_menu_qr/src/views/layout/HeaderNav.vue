@@ -3,12 +3,12 @@
             <div class="backgroundNav">
                 <select-view :list="list" :listImg="listImg" :openList="openList" :openListImg="openListImg" @openList="updateOpenList" @openListImg="updateOpenList" />
                 <span class="categoryName">
-                    {{ categoryName }}
+                    {{ language === 'it'? categoryName : categoryName_en }}
                 </span>
-                <AllergensButton :venuePath="venuePath" @filter-allergen="handleFilterAllergen" />
+                <AllergensButton :language="language" :venuePath="venuePath" @filter-allergen="handleFilterAllergen" />
             </div>
             <div v-if="selectedAllergens.length > 0" class="allergenFilter">
-                Allergeni esclusi:
+                {{ language === 'it'? 'Allergeni esclusi:' : 'Excluded allergens:' }}
                 <div>
                     <img v-for="allergen in selectedAllergens" :key="allergen.id":src="allergen.icon" alt="" @click="deleteFilterAllergen(allergen)">
                 </div>
@@ -32,6 +32,10 @@ export default {
             type: String,
             required: true
         },
+        categoryName_en: {
+            type: String,
+            required: true
+        },
         list: {
             type: Boolean,
             required: true
@@ -40,6 +44,10 @@ export default {
             type: Boolean,
             required: true
         },
+        language: {
+            type: String,
+            required: true
+        }
     },
     components: {
         AllergensButton,

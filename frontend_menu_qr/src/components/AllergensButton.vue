@@ -1,7 +1,7 @@
 <template>
     <span>
         <button class="pill-button" @click="toggleShowAllergens" style="color: var(--white); font-size: 14.5px; padding: 9px 5px; width: 90px">
-            {{ showAllergens ? 'applica' : 'allergeni' }}
+            {{ allergenText }}
         </button>
         <div v-if="showAllergens" class="allergens-modal" :style="{ background: `var(--header-${venuePath.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">
             <div>
@@ -31,13 +31,17 @@ export default {
         venuePath: {
             type: String,
             required: true
+        },
+        language: {
+            type: String,
+            required: true
         }
     },
     data() {
         return {
             showAllergens: false,
             allergens: [],
-            selectedAllergens: []
+            selectedAllergens: [],
         };
     },
     mounted() {
@@ -73,7 +77,16 @@ export default {
             this.$emit('filter-allergen', this.selectedAllergens);
         }
     },
-    
+    computed: {
+        allergenText() {
+            switch (this.language) {
+                case 'it':
+                return this.showAllergens ? 'applica' : 'allergeni';
+                default:
+                return this.showAllergens ? 'apply' : 'allergens';
+            }
+        }
+    }
 }
 </script>
 

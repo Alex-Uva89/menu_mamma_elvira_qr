@@ -35,6 +35,7 @@ export default {
     methods: {
     changeLanguage(newLanguage) {
       this.currentLanguage = newLanguage;
+      this.$emit('language-changed', newLanguage);
     },
   },
 };
