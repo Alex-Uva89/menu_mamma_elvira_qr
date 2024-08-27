@@ -65,7 +65,7 @@ app.get('/api/venues/:venue', (req, res) => {
         d.name_en AS dish_name_en,
         d.image AS dish_image,
         d.description AS dish_description,
-        d.description_en AS dish_description_en
+        d.description_en AS dish_description_en,
         d.price AS dish_price,
         d.is_active AS dish_is_active,
         dr.id AS drink_id, 
