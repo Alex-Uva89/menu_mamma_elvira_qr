@@ -6,9 +6,13 @@
         <div v-if="showAllergens" class="allergens-modal" :style="{ background: `var(--header-${venuePath.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">
             <div>
                 <ul>
-                    <li v-for="allergen in allergens" :key="allergen.id" :id="allergen.id" :class="{'allergen': true, 'selected': isSelected(allergen)}" @click="filterAllergen(allergen)">
-                        <img :src="allergen.icon" alt="">
-                        {{ language === 'it' ? allergen.name : allergen.name_en }}
+                    <li v-for="allergen in allergens" :key="allergen.id" :id="allergen.id" >
+                        <span :class="{'allergen': true, 'selected': isSelected(allergen)}" @click="filterAllergen(allergen)">
+                            <img :src="allergen.icon" alt="">
+                        </span>
+                        <span>
+                            {{ language === 'it' ? allergen.name : allergen.name_en }}
+                        </span>
                     </li>
                 </ul>
                 <div class="allergenReset">
@@ -129,6 +133,20 @@ export default {
             }
             img{
                 width: 40px;
+            }
+        }
+        li{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: calc(100% / 3);
+            margin: 10px 0;
+            span{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
             }
         }
     }
