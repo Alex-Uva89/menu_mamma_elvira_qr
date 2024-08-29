@@ -1,5 +1,5 @@
 .border-container{
-    padding-bottom: 40px;
+    padding-bottom: 30px;
 }
 
 .dish-list-container {
@@ -15,7 +15,7 @@
     align-items: center;
     padding: 10px;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 5px;
 }
 
 .dish-list-item-details {
