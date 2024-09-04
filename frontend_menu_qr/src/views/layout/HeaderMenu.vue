@@ -5,7 +5,7 @@
         </router-link>
         <div class="logo">
             <!-- Logo del tuo sito -->
-            <img :src="`/assets/${venuePath}.svg`" alt="Logo">
+            <img :src="`/assets/${venuePath}.png`" alt="Logo">
         </div>
         <LanguageSwitch @language-changed="changeLanguage" />
     </div>
