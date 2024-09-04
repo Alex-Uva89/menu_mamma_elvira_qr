@@ -36,17 +36,17 @@ module.exports = defineConfig({
       clientsClaim: true,
       runtimeCaching: [
         {
-          urlPattern: new RegExp('^https://example.com/'), // Adatta alla tua configurazione
-          handler: 'CacheFirst', // Strategia di caching
+          urlPattern: new RegExp('^https://menu-mammaelvira-fe-80d79ebfc254.herokuapp.com/'),
+          handler: 'CacheFirst',
           options: {
-            cacheName: 'example-cache',
+            cacheName: 'menu-mammaelvira-cache',
             expiration: {
               maxEntries: 50,
-              maxAgeSeconds: 30 * 24 * 60 * 60, // 30 giorni
+              maxAgeSeconds: 30 * 24 * 60 * 60, 
             },
           },
         },
-      ]
+      ],
     }
   }
 });
