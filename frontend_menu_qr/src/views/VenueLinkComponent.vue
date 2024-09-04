@@ -1,7 +1,7 @@
 <template>
 
     <router-link :to="'/' + venue" :class="backgroundClass">
-      <img :src="'./assets/' + venue + '.svg'" :alt="venue + ' logo'" />
+      <img :src="'./assets/' + venue + '.png'" :alt="venue + ' logo'" />
     </router-link>
   
 </template>
