@@ -15,7 +15,7 @@
         </template>
         <li v-if="showDrinks && hasDistillati" @click="sendDataDistillati" :class="{ active: activeCategory === 'Distillati' }">
             <span class="categories">
-                {{ language === 'it'? 'Distillati' : 'Distillates'  }}
+                {{ language === 'it'? 'Altri Alcolici' : 'Other Spirits'  }}
             </span>
         </li>
         <li v-if="showDrinks && hasCocktails" @click="sendDataCocktails" :class="{ active: activeCategory === 'Cocktails' }">

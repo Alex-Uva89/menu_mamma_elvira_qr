@@ -86,7 +86,7 @@ export default {
                 case 'Vini':
                     return this.language === 'it' ? 'Vini' : 'Wines';
                 case 'Distillati':  
-                    return this.language === 'it' ? 'Distillati' : 'Distillates';
+                    return this.language === 'it' ? 'Altri Alcolici' : 'Other Spirits';
                 case 'Birre':
                     return this.language === 'it' ? 'Birre' : 'Beers';
                 case 'Cocktails':
@@ -135,13 +135,11 @@ export default {
 
 .categoryName{
     width: calc(100% / 3);
-    letter-spacing: -2px;
-    word-spacing: -10px;
     overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    white-space: wrap;
     font-size: 16px;
     text-align: center;
+    line-height: 1rem;
 }
 
 
