@@ -1,5 +1,6 @@
 const { defineConfig } = require('@vue/cli-service');
 const webpack = require('webpack');
+const TerserPlugin = require('terser-webpack-plugin'); // Importa TerserPlugin
 
 module.exports = defineConfig({
   transpileDependencies: true,
@@ -10,7 +11,19 @@ module.exports = defineConfig({
         '__VUE_PROD_DEVTOOLS__': JSON.stringify(false),
         '__VUE_PROD_HYDRATION_MISMATCH_DETAILS__': JSON.stringify(true),
       })
-    ]
+    ],
+    optimization: {
+      minimize: true, 
+      minimizer: [
+        new TerserPlugin({ 
+          terserOptions: {
+            compress: {
+              drop_console: true,
+            },
+          },
+        }),
+      ],
+    }
   },
   pwa: {
     name: 'My PWA App',
@@ -21,6 +34,19 @@ module.exports = defineConfig({
     workboxOptions: {
       skipWaiting: true,
       clientsClaim: true,
+      runtimeCaching: [
+        {
+          urlPattern: new RegExp('^https://example.com/'), // Adatta alla tua configurazione
+          handler: 'CacheFirst', // Strategia di caching
+          options: {
+            cacheName: 'example-cache',
+            expiration: {
+              maxEntries: 50,
+              maxAgeSeconds: 30 * 24 * 60 * 60, // 30 giorni
+            },
+          },
+        },
+      ]
     }
   }
 });
