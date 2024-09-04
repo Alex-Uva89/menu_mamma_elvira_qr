@@ -47,7 +47,7 @@
         </template>
         </template>
         <template v-else>
-          <p class="absent">Non sono presenti prodotti nella categoria {{ categoryName }}</p>
+          <p class="absent"></p>
         </template>
       </template>
       
