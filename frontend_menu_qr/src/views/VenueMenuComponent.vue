@@ -17,7 +17,7 @@
     <template v-if="Array.isArray(categories)">
       <template v-if="categories.some(category => category.is_drink && category.is_active && category.drinks.length > 0)">
         <template v-for="category in categories" :key="category.id">
-          <div v-if="category.is_drink && category.is_active && category.drinks.length > 0" class="category-container">
+          <div v-if="category.is_drink && category.is_active && category.drinks.length > 0 && categoryName != 'Vermouth' && categoryName != 'Birre'" class="category-container">
             <div
               class="categories-drink" 
               :style="{ 
@@ -30,11 +30,17 @@
             <ul v-if="isCategoryVisible(category.id)">
               <li v-for="drink in category.drinks" :key="drink.id">
                 <span class="categories">
-                  <card v-if="listImg" :language="currentLanguage" :dish="drink" :venuePath="venueName" :isDrink="category.is_drink" :isWine="category.name.toLowerCase().includes('vini')" />
-                  <list v-if="list" :language="currentLanguage" :dish="drink" :venuePath="venueName" :isDrink="category.is_drink" :isWine="category.name.toLowerCase().includes('vini')" />
+                  <card v-if="listImg" :language="currentLanguage" :dish="drink" :venuePath="venueName" :isDrink="category.is_drink" :isWine="category.name.toLowerCase().includes('vini') || category.name.toLowerCase().includes('bolle')" />
+                  <list v-if="list" :language="currentLanguage" :dish="drink" :venuePath="venueName" :isDrink="category.is_drink" :isWine="category.name.toLowerCase().includes('vini') || category.name.toLowerCase().includes('bolle')" />
                 </span>
               </li>
             </ul>
+          </div>
+          <div v-else-if="category.is_drink && category.is_active && category.drinks.length > 0 && (categoryName === 'Vermouth' || categoryName === 'Birre')" class="category-container">
+            <div v-for="drink in category.drinks" :key="drink.id" class="categories">
+                  <card v-if="listImg" :language="currentLanguage" :dish="drink" :venuePath="venueName" /> 
+                  <list v-if="list" :language="currentLanguage" :dish="drink" :venuePath="venueName" />
+          </div>
           </div>
         </template>
       </template>

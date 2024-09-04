@@ -9,7 +9,7 @@
 }
 
 .dish-list-item {
-    min-height: 80px;
+    min-height: 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
