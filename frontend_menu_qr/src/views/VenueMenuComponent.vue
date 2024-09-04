@@ -16,9 +16,11 @@
   <div class="venue">  
     <template v-if="Array.isArray(categories)">
       <template v-if="categories.some(category => category.is_drink && category.is_active && category.drinks.length > 0)">
-        <template v-for="category in categories" :key="category.id">
-          <div v-if="category.is_drink && category.is_active && category.drinks.length > 0 && categoryName != 'Vermouth' && categoryName != 'Birre'" class="category-container">
-            <div
+        <template v-if="categories">
+
+          <template v-for="category in categories" :key="category.id">
+            <div v-if="category.is_drink && category.is_active && category.drinks.length > 0 && categoryName != 'Vermouth' && categoryName != 'Birre'" class="category-container">
+              <div
               class="categories-drink" 
               :style="{ 
                   border: `5px solid var(--nav-${venueName.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})`,
@@ -43,12 +45,13 @@
           </div>
           </div>
         </template>
+        </template>
+        <template v-else>
+          <p class="absent">Non sono presenti prodotti nella categoria {{ categoryName }}</p>
+        </template>
       </template>
-
+      
       <!-- Mostra il messaggio se nessuna categoria ha drink disponibili -->
-      <template v-else>
-        <p class="absent">Non sono presenti prodotti nella categoria {{ categoryName }}</p>
-      </template>
     </template>
     <template v-else>
       <div>
