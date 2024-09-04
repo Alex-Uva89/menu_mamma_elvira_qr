@@ -12,4 +12,19 @@ module.exports = defineConfig({
       })
     ]
   },
+  pwa: {
+    name: 'My PWA App',
+    themeColor: '#ffffff',
+    msTileColor: '#000000',
+    appleMobileWebAppCapable: 'yes',
+    appleMobileWebAppStatusBarStyle: 'black',
+    manifestOptions: {
+      short_name: 'PWA App',
+      background_color: '#ffffff'
+    },
+    workboxOptions: {
+      skipWaiting: true,
+      clientsClaim: true,
+    }
+  }
 });
