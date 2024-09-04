@@ -44,17 +44,11 @@
           </div>
         </template>
       </template>
-
-      <!-- Mostra il messaggio se nessuna categoria ha drink disponibili -->
-      <template v-else>
-        <p class="absent">
-        
-        </p>
-      </template>
     </template>
+
+
     <template v-else>
       <div>
-
         <!-- FOOD -->
         <ul v-if="!categories.is_drink && categories.is_active">
           <li v-for="dish in categories.dishes" :key="dish.id" class="categories">
@@ -81,13 +75,6 @@
         </ul>
 
         <!-- DRINKS -->
-        <ul v-else-if="categories.is_drink && categories.is_active">
-          <li v-for="drink in categories.drinks" :key="drink.id" class="categories">
-            <span class="categories">
-              {{ drink.name }}
-            </span>
-          </li>
-        </ul>
       </div>
     </template>
     
