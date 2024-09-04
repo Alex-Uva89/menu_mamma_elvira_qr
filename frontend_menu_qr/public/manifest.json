@@ -1,12 +1,69 @@
 {
-  "name": "My PWA App",
-  "short_name": "PWA App",
+  "name": "Mamma Elvira Menu",
+  "short_name": "MEm App",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ffffff",
   "orientation": "portrait-primary",
   "scope": "/",
-  "description": "A description of my PWA app"
+  "description": "App per la visualizzaizone dei menù del gruppo Mamma Elvira",
+    "icons": [
+        {
+        "src": "assets/'Scante.png",
+        "sizes": "875x500",
+        "type": "image/png"
+        },
+        {
+        "src": "assets/La Cucina.png",
+        "sizes": "1004x650",
+        "type": "image/png"
+        },
+        {
+        "src": "assets/Enoteca.png",
+        "sizes": "1004x650",
+        "type": "image/png"
+        },
+        {
+        "src": "assets/favicon-32x32_dark.png",
+        "sizes": "67x67",
+        "type": "image/png"
+        },
+        {
+        "src": "assets/apple-touch-icon.png",
+        "sizes": "750x750",
+        "type": "image/png",
+        "purpose": "any"
+        }
+    ],
+    "screenshots": [
+        {
+          "src": "assets/screenshot1.png",
+          "sizes": "561x777",
+          "type": "image/png",
+          "form_factor": "wide"
+        },
+        {
+          "src": "assets/screenshot2.png",
+          "sizes": "601x930",
+          "type": "image/png"
+        },
+        {
+          "src": "assets/screenshot3.png",
+          "sizes": "602x925",
+          "type": "image/png"
+        },
+        {
+          "src": "assets/screenshot4.png",
+          "sizes": "595x931",
+          "type": "image/png"
+        }
+    ],
+    "protocol_handlers": [
+        {
+          "protocol": "web+myapp",
+          "url": "/?url=%s"
+        }
+    ]
   }
   
