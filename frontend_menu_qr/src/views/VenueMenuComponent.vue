@@ -47,7 +47,9 @@
         </template>
         </template>
         <template v-else>
-          <p class="absent"></p>
+          <p class="absent">
+            
+          </p>
         </template>
       </template>
       
