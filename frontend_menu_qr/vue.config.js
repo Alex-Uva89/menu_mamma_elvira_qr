@@ -36,7 +36,7 @@ module.exports = defineConfig({
       clientsClaim: true,
       runtimeCaching: [
         {
-          urlPattern: new RegExp('^https://menu-mammaelvira-fe-80d79ebfc254.herokuapp.com/'),
+          urlPattern: /^https:\/\/menu-mammaelvira-fe-80d79ebfc254\.herokuapp\.com\//,
           handler: 'CacheFirst',
           options: {
             cacheName: 'menu-mammaelvira-cache',
@@ -46,7 +46,7 @@ module.exports = defineConfig({
             },
           },
         },
-      ],
+      ]
     }
   }
 });
