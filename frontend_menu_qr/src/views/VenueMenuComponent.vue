@@ -27,7 +27,7 @@
                   background: `var(--header-${venueName.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})`
                 }" 
                 @click="toggleCategory(category.id)">
-              {{ currentLanguage === 'it'? category.name : category.name_en }}
+              {{  language !== 'it' && !category.name_en ? category.name : (language === 'it' ? category.name : category.name_en) }}
             </div>
             <ul v-if="isCategoryVisible(category.id)">
               <li v-for="drink in category.drinks" :key="drink.id">
