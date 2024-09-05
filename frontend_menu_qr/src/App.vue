@@ -2,7 +2,15 @@
   <section class="home">
     <article class="home-link" v-if="isHomePage">
       <h1 v-if="isHomePage" class="home-title">I Nostri Menù</h1>
-      <VenueLink v-for="venue in venues" :key="venue" :venue="venue" />
+      <div class="container-main">
+        <VenueLink v-for="venue in venues" :key="venue" :venue="venue" />
+      </div>
+      <div class="container-link-ext">
+        <p>Visita il nostro sito </p>
+        <a href="https://www.mammaelvira.com" target="_blank" >
+          www.<img src="/assets/favicon-32x32_dark.png" alt="Mamma Elvira" style="width: 30px; height: auto;">.com
+        </a>
+      </div>
     </article>
     <router-view v-if="!isHomePage"/>
   </section>
@@ -14,45 +22,60 @@
   height: 100vh;
   width: 100%;
   background-color: var(--mamma-stone);
-  overflow: auto;
+  overflow: hidden;
   scrollbar-width: none;
   .home-title{
-    height: 100px;
+    height: 10vh;
     display: flex;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
     font-family: var(--Decima); 
     font-size: 2rem;
     margin-bottom:10px;
   }
-  .home-link{
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    a {
-        width: 60%;
-        border: 1px solid #000;
-        border-radius: 5px;
-        text-decoration: none;
-        color: #000;
+    .home-link{
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      .container-main{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+      }
+      .container-link-ext{
         display: flex;
         justify-content: center;
         align-items: center;
-    }
-
-    .bg-olive {
-        background-color: rgb(107, 114, 56);
-    }
-    .bg-gray {
-        background-color: rgb(150, 150, 150);
-    }
-    .bg-red {
-        background-color: rgb(165, 26, 26);
-    }
-    
+        gap: 10px;
+        p{
+          font-family: var(--Decima);
+          font-size: .8rem;
+          word-spacing: 1px;
+        }
+      }
+      a {
+          border-radius: 5px;
+          text-decoration: none;
+          color: #000;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+      }
+  
+      .bg-olive {
+          background-color: rgb(107, 114, 56);
+      }
+      .bg-gray {
+          background-color: rgb(150, 150, 150);
+      }
+      .bg-red {
+          background-color: rgb(165, 26, 26);
+      }
+      
   }
   .pill-button {
     border: 1px solid var(--white);
@@ -67,6 +90,14 @@
     justify-content: center;
     align-items: center;
   }
+}
+
+.logo-home{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @media screen and (min-width: 768px) {
