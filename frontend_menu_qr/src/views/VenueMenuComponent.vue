@@ -13,7 +13,9 @@
       @update-open-list-img="handleUpdateOpenListImg"
     />
   </header>
+
   <div class="venue">  
+    <!-- DRINK -->
     <template v-if="Array.isArray(categories)">
       <template v-if="categories.some(category => category.is_drink && category.is_active && category.drinks.length > 0)">
         <template v-for="category in categories" :key="category.id">
@@ -45,15 +47,15 @@
         </template>
       </template>
 
-      <!-- Mostra il messaggio se nessuna categoria ha drink disponibili -->
+      <!-- NO CATEGORIES -->
       <template v-else>
-        <p class="absent">Non sono presenti prodotti nella categoria {{ categoryName }}</p>
+        <p class="absent"> </p>
       </template>
     </template>
+    <!-- FOOD -->
     <template v-else>
       <div>
 
-        <!-- FOOD -->
         <ul v-if="!categories.is_drink && categories.is_active">
           <li v-for="dish in categories.dishes" :key="dish.id" class="categories">
             <template v-if="selectedAllergens && selectedAllergens.length > 0">
@@ -87,9 +89,14 @@
           </li>
         </ul>
       </div>
+      <div class="service-price">
+        Coperto: 3€
+      </div>
     </template>
     
+
   </div>
+
   <nav-component 
     :language="currentLanguage"
     :categories="venue.categories" 
@@ -241,7 +248,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 img {
   max-width: 200px;
 }
@@ -298,5 +305,11 @@ header{
   text-transform: uppercase;
 }
 
+.service-price{
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  font-family: var(--Decima);
+}
 
 </style>

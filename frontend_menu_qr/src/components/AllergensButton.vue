@@ -4,7 +4,7 @@
             {{ allergenText }}
         </button>
         <div v-if="showAllergens" class="allergens-modal" :style="{ background: `var(--header-${venuePath.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">
-            <div>
+            <div style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
                 <ul>
                     <li v-for="allergen in allergens" :key="allergen.id" :id="allergen.id" >
                         <span :class="{'allergen': true, 'selected': isSelected(allergen)}" @click="filterAllergen(allergen)">
@@ -19,9 +19,9 @@
                     <button @click="resetAllergens">
                         {{ language === 'it' ? 'deseleziona tutti gli allergeni' : 'deselect all allergens' }}
                     </button>
+                    <div class="nb">{{ language === 'it'? 'NB. comunicare sempre allergeni allo staff' : 'NB. always communicate allergens to the staff' }}</div>
                 </div>
             </div>
-            <div class="nb">{{ language === 'it'? 'NB. comunicare sempre allergeni allo staff' : 'NB. always communicate allergens to the staff' }}</div>
         </div>
     </span>
 </template>
@@ -102,7 +102,6 @@ export default {
     top: 139px;
     right: 0;
     color: var(--black);
-    border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     z-index: 100;
     display: flex;
@@ -112,7 +111,6 @@ export default {
     padding-bottom: 20px;
     height: calc(100vh - 140px);
     ul{
-        margin:30px 10px;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
@@ -141,7 +139,7 @@ export default {
             align-items: center;
             justify-content: center;
             width: calc(100% / 3);
-            margin: 10px 0;
+            margin: 5px 0;
             span{
                 display: flex;
                 justify-content: center;
@@ -160,16 +158,20 @@ export default {
 
 .allergenReset{
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    margin-top: 20px;
+    margin-bottom: 5px;
     button{
+        width: 80%;
+        margin: auto;
         color: var(--white);
-        padding: 5px 10px;
+        padding: 5px 5px;
         border: 2px solid var(--white);
         border-radius: 5px;
         font-size: 1rem;
         cursor: pointer;
         text-transform: uppercase;
+        margin-bottom: 5px;
     }
 }
 </style>
