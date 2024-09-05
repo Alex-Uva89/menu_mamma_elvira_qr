@@ -189,6 +189,7 @@ export default {
 
           this.categoryName = this.categories.name;
           this.categoryName_en = this.categories.name_en;
+
         })
         .catch(error => {
           console.error('Errore durante il recupero dei dati del locale:', error);
@@ -206,6 +207,8 @@ export default {
       },
       handleUpdateCategory(category) {
         this.categories = category;
+        this.categoryName = this.categories.name;
+        this.categoryName_en = this.categories.name_en;
       },
       handleUpdateNameCategory(name) {
         this.categoryName = name;

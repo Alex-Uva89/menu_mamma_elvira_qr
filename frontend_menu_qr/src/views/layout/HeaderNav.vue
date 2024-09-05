@@ -4,7 +4,6 @@
                 <select-view :list="list" :listImg="listImg" :openList="openList" :openListImg="openListImg" @openList="updateOpenList" @openListImg="updateOpenList" />
                 <span class="categoryName">
                     {{ categoryText }}
-                    {{ categoryName  }}
                 </span>
                 <AllergensButton :language="language" :venuePath="venuePath" @filter-allergen="handleFilterAllergen" />
             </div>
@@ -95,7 +94,7 @@ export default {
                 case 'Vermouth':
                     return 'Vermouth';
                 default:
-                    return this.language === 'it' ? this.categoryName : this.categoryName_en;
+                    return this.language !== 'it' && !this.categoryName_en ? this.categoryName : (this.language === 'it' ? this.categoryName : this.categoryName_en);
             }
         }
     }
