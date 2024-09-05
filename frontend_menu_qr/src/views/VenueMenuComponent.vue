@@ -13,40 +13,10 @@
       @update-open-list-img="handleUpdateOpenListImg"
     />
   </header>
+
   <div class="venue">  
-
-    <template v-if="!Array.isArray(categories)">
-      <div>
-        <!-- FOOD -->
-        <ul v-if="!categories.is_drink && categories.is_active">
-          <li v-for="dish in categories.dishes" :key="dish.id" class="categories">
-            <template v-if="selectedAllergens && selectedAllergens.length > 0">
-              <router-link 
-                :to="{ name: 'viewDish', params: { id: dish.id } }" 
-                @click.native="storeDishData(dish, venueName, allergensDish, list, listImg, categories)"
-                v-if="!allergensDish.some(allergen => allergen.dish_id === dish.id && selectedAllergens.some(selected => allergen.allergen_id === selected.id))">
-                  <card v-if="listImg" :language="currentLanguage" :dish="dish" :venuePath="venueName" />
-                  <list v-if="list" :language="currentLanguage" :dish="dish" :venuePath="venueName" />
-              </router-link>
-            </template>
-            <router-link 
-            :to="{ name: 'viewDish', params: { id: dish.id } }" 
-            @click.native="storeDishData(dish, venueName, allergensDish, list, listImg, categories)" 
-            v-else>
-              <card v-if="listImg" :language="currentLanguage" :dish="dish" :venuePath="venueName" />
-              <list v-if="list" :language="currentLanguage" :dish="dish" :venuePath="venueName" />
-            </router-link>
-          </li>
-          <li v-if="selectedAllergens && selectedAllergens.length > 0 && !categories.dishes.some(dish => !allergensDish.some(allergen => allergen.dish_id === dish.id && selectedAllergens.some(selected => allergen.allergen_id === selected.id)))">
-            Non ci sono piatti con i filtri selezionati
-          </li>
-        </ul>
-
-        <!-- DRINKS -->
-      </div>
-    </template>
-
-    <template v-else >
+    <!-- DRINK -->
+    <template v-if="Array.isArray(categories)">
       <template v-if="categories.some(category => category.is_drink && category.is_active && category.drinks.length > 0)">
         <template v-for="category in categories" :key="category.id">
           <div v-if="category.is_drink && category.is_active && category.drinks.length > 0 && categoryName != 'Vermouth' && categoryName != 'Birre'" class="category-container">
@@ -76,12 +46,57 @@
           </div>
         </template>
       </template>
+
+      <!-- NO CATEGORIES -->
+      <template v-else>
+        <p class="absent"> </p>
+      </template>
     </template>
+    <!-- FOOD -->
+    <template v-else>
+      <div>
 
+        <ul v-if="!categories.is_drink && categories.is_active">
+          <li v-for="dish in categories.dishes" :key="dish.id" class="categories">
+            <template v-if="selectedAllergens && selectedAllergens.length > 0">
+              <router-link 
+                :to="{ name: 'viewDish', params: { id: dish.id } }" 
+                @click.native="storeDishData(dish, venueName, allergensDish, list, listImg, categories)"
+                v-if="!allergensDish.some(allergen => allergen.dish_id === dish.id && selectedAllergens.some(selected => allergen.allergen_id === selected.id))">
+                  <card v-if="listImg" :language="currentLanguage" :dish="dish" :venuePath="venueName" />
+                  <list v-if="list" :language="currentLanguage" :dish="dish" :venuePath="venueName" />
+              </router-link>
+            </template>
+            <router-link 
+            :to="{ name: 'viewDish', params: { id: dish.id } }" 
+            @click.native="storeDishData(dish, venueName, allergensDish, list, listImg, categories)" 
+            v-else>
+              <card v-if="listImg" :language="currentLanguage" :dish="dish" :venuePath="venueName" />
+              <list v-if="list" :language="currentLanguage" :dish="dish" :venuePath="venueName" />
+            </router-link>
+          </li>
+          <li v-if="selectedAllergens && selectedAllergens.length > 0 && !categories.dishes.some(dish => !allergensDish.some(allergen => allergen.dish_id === dish.id && selectedAllergens.some(selected => allergen.allergen_id === selected.id)))">
+            Non ci sono piatti con i filtri selezionati
+          </li>
+        </ul>
 
+        <!-- DRINKS -->
+        <ul v-else-if="categories.is_drink && categories.is_active">
+          <li v-for="drink in categories.drinks" :key="drink.id" class="categories">
+            <span class="categories">
+              {{ drink.name }}
+            </span>
+          </li>
+        </ul>
+      </div>
+      <div class="service-price">
+        Coperto: 3€
+      </div>
+    </template>
     
-    
+
   </div>
+
   <nav-component 
     :language="currentLanguage"
     :categories="venue.categories" 
@@ -233,7 +248,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 img {
   max-width: 200px;
 }
@@ -290,5 +305,11 @@ header{
   text-transform: uppercase;
 }
 
+.service-price{
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  font-family: var(--Decima);
+}
 
 </style>

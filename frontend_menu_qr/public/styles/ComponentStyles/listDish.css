@@ -99,3 +99,11 @@
     white-space: wrap;
     overflow: hidden;
 }
+
+.badge-not-translated{
+    font-size: 0.8rem;
+    color: var(--text-grey);
+    background-color: var(--background-grey);
+    padding: 0 5px 2px;
+    border-radius: 5px;
+}
