@@ -27,13 +27,18 @@
                   background: `var(--header-${venueName.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})`
                 }" 
                 @click="toggleCategory(category.id)">
-              {{  language !== 'it' && !category.name_en ? category.name : (language === 'it' ? category.name : category.name_en) }}
-            </div>
-            <ul v-if="isCategoryVisible(category.id)">
-              <li v-for="drink in category.drinks" :key="drink.id">
-                <span class="categories">
-                  <card v-if="listImg" :language="currentLanguage" :dish="drink" :venuePath="venueName" :isDrink="category.is_drink" :isWine="category.name.toLowerCase().includes('vini') || category.name.toLowerCase().includes('bolle')" />
-                  <list v-if="list" :language="currentLanguage" :dish="drink" :venuePath="venueName" :isDrink="category.is_drink" :isWine="category.name.toLowerCase().includes('vini') || category.name.toLowerCase().includes('bolle')" />
+                {{  language !== 'it' && !category.name_en ? category.name : (language === 'it' ? category.name : category.name_en) }}
+              </div>
+              <ul v-if="isCategoryVisible(category.id)">
+                <li v-for="drink in category.drinks" :key="drink.id">
+                  <span class="categories">
+                    <router-link 
+                    :to="{ name: 'viewDrink', params: { id: drink.id } }" 
+                    @click.native="storeDishData(drink, venueName, allergensDish, list, listImg, categories)"
+                    v-if="!allergensDish.some(allergen => allergen.drink_id === drink.id && selectedAllergens.some(selected => allergen.allergen_id === selected.id))">
+                      <card v-if="listImg" :language="currentLanguage" :dish="drink" :venuePath="venueName" :isDrink="category.is_drink" :isWine="category.name.toLowerCase().includes('vini') || category.name.toLowerCase().includes('bolle')" />
+                      <list v-if="list" :language="currentLanguage" :dish="drink" :venuePath="venueName" :isDrink="category.is_drink" :isWine="category.name.toLowerCase().includes('vini') || category.name.toLowerCase().includes('bolle')" />
+                    </router-link>
                 </span>
               </li>
             </ul>
