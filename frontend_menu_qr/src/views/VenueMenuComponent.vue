@@ -90,7 +90,7 @@
         </ul>
       </div>
       <div class="service-price">
-        Coperto: 3€
+            {{ venueName === 'Enoteca' ? (categories.name === 'Degustazione di Vino' ? '' : 'Coperto: 1') : 'Coperto: 3' }}
       </div>
     </template>
     
@@ -105,6 +105,7 @@
     @update-category="handleUpdateCategory"
     @category-name="handleUpdateNameCategory"
   />
+
 </template>
 
 <script>
