@@ -4,6 +4,7 @@
                 <select-view :list="list" :listImg="listImg" :openList="openList" :openListImg="openListImg" @openList="updateOpenList" @openListImg="updateOpenList" />
                 <span class="categoryName">
                     {{ categoryText }}
+                    {{ categoryName  }}
                 </span>
                 <AllergensButton :language="language" :venuePath="venuePath" @filter-allergen="handleFilterAllergen" />
             </div>
