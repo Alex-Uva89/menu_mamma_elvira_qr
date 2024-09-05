@@ -90,7 +90,8 @@
         </ul>
       </div>
       <div class="service-price">
-        Coperto: 3€
+        Coperto: 
+        {{ venueName === 'Enoteca' ? '1' : '3' }}
       </div>
     </template>
     
