@@ -95,7 +95,12 @@
         </ul>
       </div>
       <div class="service-price">
-            {{ venueName === 'Enoteca' ? (categories.name === 'Degustazione di Vino' ? '' : 'Coperto: 1') : 'Coperto: 3' }}
+            {{ venueName === 'Enoteca' 
+              ? (categories.name === 'Degustazione di Vino' 
+                ? '' 
+                : (currentLanguage === 'it' ? 'Coperto: 1' : 'Cover charge: 1')) 
+              : (currentLanguage === 'it' ? 'Coperto: 3' : 'Cover charge: 3') 
+            }}
       </div>
     </template>
     
