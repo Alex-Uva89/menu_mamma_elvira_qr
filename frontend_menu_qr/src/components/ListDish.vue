@@ -25,7 +25,7 @@
             </h4>
           </div>
           <div v-if="!isDrink" class="dish-list-item-price">
-             {{ dish.price }}
+             {{ dish.price }} 
           </div>
           <div v-if="dish.description" class="dish-list-item-description">
             {{ language !== 'it' && !dish.description_en ? dish.description : (language === 'it' ? dish.description : dish.description_en) }}

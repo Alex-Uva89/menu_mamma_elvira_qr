@@ -63,8 +63,8 @@
 
         <ul v-if="!categories.is_drink && categories.is_active">
           <li v-for="dish in categories.dishes" :key="dish.id" class="categories">
-            <template v-if="selectedAllergens && selectedAllergens.length > 0">
-              <router-link 
+            <template v-if="selectedAllergens && selectedAllergens.length > 0 && dish.is_active">
+              <router-link
                 :to="{ name: 'viewDish', params: { id: dish.id } }" 
                 @click.native="storeDishData(dish, venueName, allergensDish, list, listImg, categories)"
                 v-if="!allergensDish.some(allergen => allergen.dish_id === dish.id && selectedAllergens.some(selected => allergen.allergen_id === selected.id))">
@@ -72,13 +72,13 @@
                   <list v-if="list" :language="currentLanguage" :dish="dish" :venuePath="venueName" />
               </router-link>
             </template>
-            <router-link 
-            :to="{ name: 'viewDish', params: { id: dish.id } }" 
-            @click.native="storeDishData(dish, venueName, allergensDish, list, listImg, categories)" 
-            v-else>
-              <card v-if="listImg" :language="currentLanguage" :dish="dish" :venuePath="venueName" />
-              <list v-if="list" :language="currentLanguage" :dish="dish" :venuePath="venueName" />
-            </router-link>
+              <router-link 
+              :to="{ name: 'viewDish', params: { id: dish.id } }" 
+              @click.native="storeDishData(dish, venueName, allergensDish, list, listImg, categories)" 
+              v-else-if="dish.is_active && selectedAllergens.length == 0">
+                <card v-if="listImg" :language="currentLanguage" :dish="dish" :venuePath="venueName" />
+                <list v-if="list" :language="currentLanguage" :dish="dish" :venuePath="venueName" />
+              </router-link>
           </li>
           <li v-if="selectedAllergens && selectedAllergens.length > 0 && !categories.dishes.some(dish => !allergensDish.some(allergen => allergen.dish_id === dish.id && selectedAllergens.some(selected => allergen.allergen_id === selected.id)))">
             Non ci sono piatti con i filtri selezionati
