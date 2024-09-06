@@ -98,11 +98,11 @@
       textSee() {
         switch (this.language) {
           case 'it':
-            return this.showDrinks ? 'Mostra cibo' : 'Mostra bevande';
+            return this.showDrinks ? 'Cibo' : 'Bevande';
           case 'en':
-            return this.showDrinks ? 'See food' : 'See drinks';
+            return this.showDrinks ? 'Food' : 'Drinks';
           default:
-            return this.showDrinks ? 'Vedi cibo' : 'Vedi bevande';
+            return this.showDrinks ? 'Cibo' : 'Bevande';
         }
       }
     },
