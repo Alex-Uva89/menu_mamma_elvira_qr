@@ -37,7 +37,7 @@ module.exports = defineConfig({
       runtimeCaching: [
         {
           urlPattern: /^https:\/\/menu-mammaelvira-fe-80d79ebfc254\.herokuapp\.com\//,
-          handler: 'CacheFirst',
+          handler: 'NetworkFirst',
           options: {
             cacheName: 'menu-mammaelvira-cache',
             expiration: {

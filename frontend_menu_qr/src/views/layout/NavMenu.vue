@@ -108,7 +108,18 @@
     },
     methods: {
       toggleShowDrinks() {
+
         this.showDrinks = !this.showDrinks;
+        if (this.showDrinks) {
+          this.$emit('update-category', Object.values(this.categories).filter(category => category.is_drink && (category.name.toLowerCase().includes('vini') || category.name.toLowerCase().includes('bolle'))));
+          this.$emit('category-name', 'Vini');
+          this.activeCategory = 'Vini';
+        } else {
+          const firstNonDrinkCategory = Object.values(this.categories).find(category => !category.is_drink);
+          this.$emit('update-category', firstNonDrinkCategory);          
+          this.$emit('category-name', firstNonDrinkCategory.name);
+          this.activeCategory = firstNonDrinkCategory.name;
+        }
       },
       sendDataWines() {
         const bolle = Object.values(this.categories).some(category => category.is_drink && category.name.toLowerCase().includes('bolle'));
