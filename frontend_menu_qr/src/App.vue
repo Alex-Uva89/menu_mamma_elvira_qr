@@ -3,7 +3,7 @@
     <article class="home-link" v-if="isHomePage">
       <h1 v-if="isHomePage" class="home-title">I Nostri Menù</h1>
       <div class="container-main">
-        <VenueLink v-for="venue in venues" :key="venue" :venue="venue" />
+        <VenueLink class="venue" v-for="venue in venues" :key="venue" :venue="venue" />
       </div>
       <div class="container-link-ext">
           <a href="https://www.mammaelvira.com" target="_blank" >
@@ -36,14 +36,16 @@
       height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: space-around;
       align-items: center;
       gap: 10px;
       .container-main{
+        width: 80%;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
+        gap: 10px;
       }
       .container-link-ext{
         width: 100%;
@@ -51,17 +53,20 @@
         justify-content: center;
         align-items: center;
         a{
+          width: 100%;
           display:flex;
           justify-content: center;
           align-items: center;
         }
       }
-      a {
+      a.venue{
           width: 100%;
           display: flex;
           justify-content: center;
+          border: 1px solid #000;
+          border-radius: 10px;
           img{
-            width: 80%;
+            width: 95%;
             height: auto;
           }
       }
