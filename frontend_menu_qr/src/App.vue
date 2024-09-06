@@ -6,10 +6,9 @@
         <VenueLink v-for="venue in venues" :key="venue" :venue="venue" />
       </div>
       <div class="container-link-ext">
-        <p>Visita il nostro sito </p>
-        <a href="https://www.mammaelvira.com" target="_blank" >
-          www.<img src="/assets/favicon-32x32_dark.png" alt="Mamma Elvira" style="width: 30px; height: auto;">.com
-        </a>
+          <a href="https://www.mammaelvira.com" target="_blank" >
+            www.<img src="/assets/favicon-32x32_dark.png" alt="Mamma Elvira" style="width: 30px; height: auto;">.com
+          </a>
       </div>
     </article>
     <router-view v-if="!isHomePage"/>
@@ -47,33 +46,34 @@
         align-items: center;
       }
       .container-link-ext{
+        width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 10px;
-        p{
-          font-family: var(--Decima);
-          font-size: .8rem;
-          word-spacing: 1px;
+        a{
+          display:flex;
+          justify-content: center;
+          align-items: center;
         }
       }
       a {
-          border-radius: 5px;
-          text-decoration: none;
-          color: #000;
+          width: 100%;
           display: flex;
           justify-content: center;
-          align-items: center;
+          img{
+            width: 80%;
+            height: auto;
+          }
       }
   
       .bg-olive {
-          background-color: rgb(107, 114, 56);
+          background-color: var(--nav-La-Cucina);
       }
       .bg-gray {
-          background-color: rgb(150, 150, 150);
+          background-color: #afafaf;
       }
       .bg-red {
-          background-color: rgb(165, 26, 26);
+          background-color: var(--nav-Enoteca);
       }
       
   }
@@ -109,6 +109,21 @@
     margin: 0 auto;
     border: 3px solid #000;
     box-shadow: 0 0 20px rgba(0,0,0,0.9);
+    .home-link{
+      justify-content: space-around;
+      a {
+          width: 100%;
+          text-decoration: none;
+          color: #000;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          img{
+            width: 100%;
+            height: auto;
+          }
+      }
+    }
   }
 }
 
