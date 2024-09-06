@@ -150,7 +150,7 @@ export default {
     }
     .nb {
         color: var(--text-color);
-        font-size: .9rem;
+        font-size: .7rem;
         text-align: center;
         width: 100%;
     }
