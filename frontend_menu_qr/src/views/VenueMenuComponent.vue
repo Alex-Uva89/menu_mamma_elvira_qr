@@ -35,7 +35,7 @@
                     <router-link 
                     :to="{ name: 'viewDrink', params: { id: drink.id } }" 
                     @click.native="storeDishData(drink, venueName, allergensDish, list, listImg, categories)"
-                    v-if="!allergensDish.some(allergen => allergen.drink_id === drink.id && selectedAllergens.some(selected => allergen.allergen_id === selected.id))">
+                    v-if="!allergensDish.some(allergen => allergen.drink_id === drink.id && selectedAllergens.some(selected => allergen.allergen_id === selected.id)) && drink.is_active">
                       <card v-if="listImg" :language="currentLanguage" :dish="drink" :venuePath="venueName" :isDrink="category.is_drink" :isWine="category.name.toLowerCase().includes('vini') || category.name.toLowerCase().includes('bolle')" />
                       <list v-if="list" :language="currentLanguage" :dish="drink" :venuePath="venueName" :isDrink="category.is_drink" :isWine="category.name.toLowerCase().includes('vini') || category.name.toLowerCase().includes('bolle')" />
                     </router-link>
