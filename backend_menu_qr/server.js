@@ -73,7 +73,8 @@ app.get('/api/venues/:venue', (req, res) => {
         dr.price AS drink_price,
         dr.grape_variety AS drink_grape_variety,
         dr.producer AS drink_producer,
-        dr.vintage AS drink_vintage
+        dr.vintage AS drink_vintage,
+        dr.is_active AS drink_is_active
     FROM venues v
     LEFT JOIN category_venue cv ON v.id = cv.venue_id
     LEFT JOIN categories c ON cv.category_id = c.id
@@ -125,7 +126,8 @@ app.get('/api/venues/:venue', (req, res) => {
           price: row.drink_price,
           grape_variety: row.drink_grape_variety,
           producer: row.drink_producer,
-          vintage: row.drink_vintage
+          vintage: row.drink_vintage,
+          is_active: row.drink_is_active
         });
       }
     });
