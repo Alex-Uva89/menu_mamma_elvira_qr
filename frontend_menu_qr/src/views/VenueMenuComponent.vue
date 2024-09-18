@@ -35,7 +35,7 @@
                     <router-link 
                     :to="{ name: 'viewDrink', params: { id: drink.id } }" 
                     @click.native="storeDishData(drink, venueName, allergensDish, list, listImg, categories)"
-                    v-if="!allergensDish.some(allergen => allergen.drink_id === drink.id && selectedAllergens.some(selected => allergen.allergen_id === selected.id)) && drink.is_active">
+                    v-if="drink.is_active && !Object.values(selectedAllergens).some(selected => !allergensDrink.some(allergen => allergen.drink_id == drink.id && allergen.allergen_id == selected.id))">
                       <card v-if="listImg" :language="currentLanguage" :dish="drink" :venuePath="venueName" :isDrink="category.is_drink" :isWine="category.name.toLowerCase().includes('vini') || category.name.toLowerCase().includes('bolle')" />
                       <list v-if="list" :language="currentLanguage" :dish="drink" :venuePath="venueName" :isDrink="category.is_drink" :isWine="category.name.toLowerCase().includes('vini') || category.name.toLowerCase().includes('bolle')" />
                     </router-link>
@@ -45,8 +45,13 @@
           </div>
           <div v-else-if="category.is_drink && category.is_active && category.drinks.length > 0 && (categoryName === 'Vermouth' || categoryName === 'Birre')" class="category-container">
             <div v-for="drink in category.drinks" :key="drink.id" class="categories">
-                  <card v-if="listImg" :language="currentLanguage" :dish="drink" :venuePath="venueName" /> 
-                  <list v-if="list" :language="currentLanguage" :dish="drink" :venuePath="venueName" />
+              <router-link 
+                    :to="{ name: 'viewDrink', params: { id: drink.id } }" 
+                    @click.native="storeDishData(drink, venueName, allergensDish, list, listImg, categories)"
+                    v-if="drink.is_active && !Object.values(selectedAllergens).some(selected => !allergensDrink.some(allergen => allergen.drink_id == drink.id && allergen.allergen_id == selected.id))">
+                <card v-if="listImg" :language="currentLanguage" :dish="drink" :venuePath="venueName" /> 
+                <list v-if="list" :language="currentLanguage" :dish="drink" :venuePath="venueName" />
+              </router-link>
           </div>
           </div>
         </template>
@@ -151,6 +156,7 @@ export default {
       categoryName_en: '',
       selectedAllergens: [],
       allergensDish: [],
+      allergensDrink: [],
       list: true,
       listImg: false,
       visibleCategories: [],
@@ -161,6 +167,7 @@ export default {
   mounted() {
       this.venueName = this.$route.params.venue;
       this.fetchAllergensDish();
+      this.fetchAllergensDrink();
       
       const storedList = sessionStorage.getItem('list');
       const storedListImg = sessionStorage.getItem('listImg');
@@ -211,6 +218,15 @@ export default {
         axios.get(`${process.env.VUE_APP_API_URL}/api/dishes/allergens`)
         .then(response => {
           this.allergensDish = response.data;
+        })
+        .catch(error => {
+          console.error('Errore durante il recupero degli allergeni:', error);
+        });
+      },
+      fetchAllergensDrink() {
+        axios.get(`${process.env.VUE_APP_API_URL}/api/drinks/allergens`)
+        .then(response => {
+          this.allergensDrink = response.data;
         })
         .catch(error => {
           console.error('Errore durante il recupero degli allergeni:', error);

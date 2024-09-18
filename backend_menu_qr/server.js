@@ -165,6 +165,20 @@ app.get('/api/dishes/allergens', (req, res) => {
   });
 });
 
+app.get('/api/drinks/allergens', (req, res) => {
+  const query = `SELECT * FROM allergen_drink`;
+
+  connection.query(query, (err, results) => {
+    if (err) {
+      console.error('Error retrieving drink allergens:', err);
+      res.status(500).json({ error: 'Error retrieving drink allergens' });
+      return;
+    }
+
+    res.json(results);
+  });
+});
+
 app.get('/api/dishes/drinks/:id', (req, res) => {
   const id = req.params.id; 
   const query = `
