@@ -74,7 +74,20 @@ app.get('/api/venues/:venue', (req, res) => {
         dr.grape_variety AS drink_grape_variety,
         dr.producer AS drink_producer,
         dr.vintage AS drink_vintage,
-        dr.is_active AS drink_is_active
+        dr.is_active AS drink_is_active,
+        dr.instructions AS drink_instructions,
+        dr.description AS drink_description,
+        dr.degrees AS drink_degrees,
+        dr.origin AS drink_origin,
+        dr.color AS drink_color,
+        dr.production_method AS drink_production_method,
+        dr.flavour AS drink_flavour,
+        dr.denomination AS drink_denomination,
+        dr.breeding_method AS drink_breeding_method,
+        dr.format AS drink_format,
+        dr.serving_temperature AS drink_serving_temperature,
+        dr.nose AS drink_nose,
+        dr.certifications AS drink_certifications
     FROM venues v
     LEFT JOIN category_venue cv ON v.id = cv.venue_id
     LEFT JOIN categories c ON cv.category_id = c.id
@@ -116,7 +129,7 @@ app.get('/api/venues/:venue', (req, res) => {
           description: row.dish_description,
           description_en: row.dish_description_en,
           price: row.dish_price,
-          is_active: row.dish_is_active,
+          is_active: row.dish_is_active
         });
       }
       if (row.drink_id) {
@@ -127,7 +140,20 @@ app.get('/api/venues/:venue', (req, res) => {
           grape_variety: row.drink_grape_variety,
           producer: row.drink_producer,
           vintage: row.drink_vintage,
-          is_active: row.drink_is_active
+          is_active: row.drink_is_active,
+          instructions: row.drink_instructions,
+          description: row.drink_description,
+          degrees: row.drink_degrees,
+          origin: row.drink_origin,
+          color: row.drink_color,
+          production_method: row.drink_production_method,
+          flavour: row.drink_flavour,
+          denomination: row.drink_denomination,
+          breeding_method: row.drink_breeding_method,
+          format: row.drink_format,
+          serving_temperature: row.drink_serving_temperature,
+          nose: row.drink_nose,
+          certifications: row.drink_certifications
         });
       }
     });
