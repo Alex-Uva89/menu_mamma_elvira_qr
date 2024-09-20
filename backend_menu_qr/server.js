@@ -87,7 +87,8 @@ app.get('/api/venues/:venue', (req, res) => {
         dr.format AS drink_format,
         dr.serving_temperature AS drink_serving_temperature,
         dr.nose AS drink_nose,
-        dr.certifications AS drink_certifications
+        dr.certifications AS drink_certifications,
+        dr.image AS drink_image
     FROM venues v
     LEFT JOIN category_venue cv ON v.id = cv.venue_id
     LEFT JOIN categories c ON cv.category_id = c.id
@@ -153,7 +154,8 @@ app.get('/api/venues/:venue', (req, res) => {
           format: row.drink_format,
           serving_temperature: row.drink_serving_temperature,
           nose: row.drink_nose,
-          certifications: row.drink_certifications
+          certifications: row.drink_certifications,
+          image: row.drink_image
         });
       }
     });

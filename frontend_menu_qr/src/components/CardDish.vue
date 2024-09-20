@@ -16,7 +16,6 @@
         <div v-if="isDrink && !isWine" class="price-tag-drink" :style="{ background: `var(--nav-${venuePath.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">
           {{ dish.price }}
         </div>
-
     </div>
   </template>
   
