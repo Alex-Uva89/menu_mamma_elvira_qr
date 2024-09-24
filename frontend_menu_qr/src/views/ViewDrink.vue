@@ -99,7 +99,7 @@
         <div v-if="dish.url">
           <button
             :style="{ borderColor: `var(--nav-${venueName.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">
-            <a :href="dish.url" target="_blank">Fattelo inviare a casa</a>
+            <a :href="dish.url" target="_blank" rel="noopener noreferrer">Fattelo inviare a casa</a>
           </button>
         </div>
       </section>

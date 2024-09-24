@@ -97,6 +97,7 @@ img {
 
 .dish-info button {
     font-family: var(--Decima);
+    color: var(--black);
     font-size: 1rem;
     border: 1px solid #fff;
     cursor: pointer;
