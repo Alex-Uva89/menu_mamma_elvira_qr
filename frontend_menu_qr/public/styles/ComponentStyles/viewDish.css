@@ -1,9 +1,9 @@
-img{
+img {
     width: auto;
     max-height: inherit;
 }
 
-.image_view{
+.image_view {
     width: 100%;
     min-height: 200px;
     display: flex;
@@ -13,7 +13,7 @@ img{
 }
 
 .header-dish,
-.footer-dish{
+.footer-dish {
     height: 70px;
     display: flex;
     align-items: center;
@@ -23,26 +23,26 @@ img{
     position: fixed;
 }
 
-.header-dish{
+.header-dish {
     top: 0;
     left: 0;
     right: 0;
 }
 
 
-.footer-dish{
+.footer-dish {
     justify-content: center;
     bottom: 0;
     left: 0;
     right: 0;
 }
 
-.header-dish img{
+.header-dish img {
     height: 100%;
     margin-right: 10px;
 }
 
-.buttonBack{
+.buttonBack {
     position: absolute;
     right: 10px;
     top: 0;
@@ -55,15 +55,16 @@ img{
     margin: 20px 0;
 }
 
-.dish-info{
+.dish-info {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 90px 0;
+    gap: 100px;
 }
 
-.dish-info p{
+.dish-info p {
     width: 100%;
     text-align: center;
     padding: 10px;
@@ -75,13 +76,13 @@ img{
 
 
 .dish-info .container-pairings li,
-.dish-info span{
+.dish-info span {
     list-style: none;
     font-family: var(--Decima);
     margin: 10px;
 }
 
-.container-pairings{
+.container-pairings {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -94,21 +95,29 @@ img{
     padding: 10px;
 }
 
+.dish-info button {
+    font-family: var(--Decima);
+    font-size: 1rem;
+    border: 1px solid #fff;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
 
-.allergens-list{
+.allergens-list {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
 }
 
-.allergens-list img{
+.allergens-list img {
     width: 50px;
     height: 50px;
     margin-right: 10px;
 }
 
-.footer-dish{
+.footer-dish {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -116,7 +125,7 @@ img{
     margin: 0;
 }
 
-.footer-dish a{
+.footer-dish a {
     width: 80px;
     background-color: var(--green);
     color: var(--white);
@@ -126,10 +135,11 @@ img{
     cursor: pointer;
 }
 
-@media screen and (min-width: 768px){
+@media screen and (min-width: 768px) {
+
     .header-dish,
-    .footer-dish{
+    .footer-dish {
         width: 29.7vw;
         margin: auto;
-    }  
+    }
 }

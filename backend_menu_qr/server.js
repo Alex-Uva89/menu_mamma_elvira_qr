@@ -88,7 +88,8 @@ app.get('/api/venues/:venue', (req, res) => {
         dr.serving_temperature AS drink_serving_temperature,
         dr.nose AS drink_nose,
         dr.certifications AS drink_certifications,
-        dr.image AS drink_image
+        dr.image AS drink_image,
+        dr.url AS drink_url
     FROM venues v
     LEFT JOIN category_venue cv ON v.id = cv.venue_id
     LEFT JOIN categories c ON cv.category_id = c.id
@@ -155,7 +156,8 @@ app.get('/api/venues/:venue', (req, res) => {
           serving_temperature: row.drink_serving_temperature,
           nose: row.drink_nose,
           certifications: row.drink_certifications,
-          image: row.drink_image
+          image: row.drink_image,
+          url: row.drink_url
         });
       }
     });
@@ -208,7 +210,7 @@ app.get('/api/drinks/allergens', (req, res) => {
 });
 
 app.get('/api/dishes/drinks/:id', (req, res) => {
-  const id = req.params.id; 
+  const id = req.params.id;
   const query = `
     SELECT dd.dish_id, dd.drink_id, d.*
     FROM dish_drink dd
