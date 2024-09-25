@@ -30,7 +30,8 @@ const routes = [
         const list = JSON.parse(sessionStorage.getItem('list'));
         const listImg = JSON.parse(sessionStorage.getItem('listImg'));
         const categorySelected = JSON.parse(sessionStorage.getItem('categorySelected'));
-        return { id: route.params.id, dish, venueName, allergensDish, list, listImg, categorySelected };
+        const currentLanguage = sessionStorage.getItem('currentLanguage');
+        return { id: route.params.id, dish, venueName, allergensDish, list, listImg, categorySelected, currentLanguage };
       }
   },
   {

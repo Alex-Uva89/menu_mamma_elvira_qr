@@ -10,9 +10,9 @@
     </header>
     <div class="dish-info">
       <img :src="!dish.image ? `../assets/default_${venueName}.jpg` : dish.image" alt="dish Image" class="image_view">
-      <h1>{{ dish.name }}</h1>
+      <h1>{{ currentLanguage === 'it'? dish.name : currentLanguage === 'en'? dish.name_en : currentLanguage === 'fr'? dish.name_fr : dish.name}}</h1>
       <p v-if="dish.description != ''" :style="{ background: `var(--nav-${venueName.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">Ingredienti</p>
-      <span>{{ dish.description }}</span>
+      <span>{{ currentLanguage === 'it'? dish.description : currentLanguage === 'en'? dish.description_en : currentLanguage === 'fr'? dish.description_fr : dish.description }}</span>
       <p v-if="pairings.length > 0" :style="{ background: `var(--nav-${venueName.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">abbinamenti</p>
       <ul class="container-pairings">
         <li v-for="pairing in pairings">
@@ -22,7 +22,7 @@
       <!-- <p :style="{ background: `var(--nav-${venueName.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">i consigli della mamma</p>
       <span></span> -->
       <p v-if="filteredAllergens.length > 0" :style="{ background: `var(--nav-${venueName.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }" class="allergens-dish">
-        allergeni
+        {{currentLanguage === 'it'? 'Allergeni' : currentLanguage === 'en'? 'Allergens': currentLanguage === 'fr'? 'Allergènes' : 'Allergeni'}} 
       </p>
       <ul class="allergens-list">
         <template v-for="allergen in filteredAllergens">
@@ -70,6 +70,10 @@ export default {
     },
     categorySelected: {
       type: Object,
+      required: true
+    },
+    currentLanguage: {
+      type: String,
       required: true
     }
   },

@@ -26,7 +26,7 @@
               <li v-for="drink in category.drinks" :key="drink.id">
                 <span class="categories">
                   <router-link :to="{ name: 'viewDrink', params: { id: drink.id } }"
-                    @click.native="storeDishData(drink, venueName, allergensDish, list, listImg, categories)"
+                    @click.native="storeDishData(drink, venueName, allergensDish, list, listImg, categories, currentLanguage)"
                     v-if="drink.is_active && !Object.values(selectedAllergens).some(selected => !allergensDrink.some(allergen => allergen.drink_id == drink.id && allergen.allergen_id == selected.id))">
                     <card v-if="listImg" :language="currentLanguage" :dish="drink" :venuePath="venueName"
                       :isDrink="category.is_drink"
@@ -67,14 +67,14 @@
           <li v-for="dish in categories.dishes" :key="dish.id" class="categories">
             <template v-if="selectedAllergens && selectedAllergens.length > 0 && dish.is_active">
               <router-link :to="{ name: 'viewDish', params: { id: dish.id } }"
-                @click.native="storeDishData(dish, venueName, allergensDish, list, listImg, categories)"
+                @click.native="storeDishData(dish, venueName, allergensDish, list, listImg, categories, currentLanguage)"
                 v-if="!allergensDish.some(allergen => allergen.dish_id === dish.id && selectedAllergens.some(selected => allergen.allergen_id === selected.id))">
                 <card v-if="listImg" :language="currentLanguage" :dish="dish" :venuePath="venueName" />
                 <list v-if="list" :language="currentLanguage" :dish="dish" :venuePath="venueName" />
               </router-link>
             </template>
             <router-link :to="{ name: 'viewDish', params: { id: dish.id } }"
-              @click.native="storeDishData(dish, venueName, allergensDish, list, listImg, categories)"
+              @click.native="storeDishData(dish, venueName, allergensDish, list, listImg, categories, currentLanguage)"
               v-else-if="dish.is_active && selectedAllergens.length == 0">
               <card v-if="listImg" :language="currentLanguage" :dish="dish" :venuePath="venueName" />
               <list v-if="list" :language="currentLanguage" :dish="dish" :venuePath="venueName" />
@@ -167,6 +167,7 @@ export default {
     const storedList = sessionStorage.getItem('list');
     const storedListImg = sessionStorage.getItem('listImg');
     const storedCategory = sessionStorage.getItem('categorySelected');
+    const storedLanguage = sessionStorage.getItem('currentLanguage');
 
     if (storedList) {
       this.list = JSON.parse(storedList);
@@ -184,6 +185,11 @@ export default {
       this.categorySelected = JSON.parse(storedCategory);
       this.fetchVenueData();
       sessionStorage.removeItem('categorySelected');
+    }
+
+    if (storedLanguage) {
+      this.currentLanguage = storedLanguage;
+      sessionStorage.removeItem('currentLanguage');
     }
   },
   methods: {
@@ -243,13 +249,14 @@ export default {
     handleLanguage(language) {
       this.currentLanguage = language;
     },
-    storeDishData(dish, venueName, allergen, list, listImg, categoriesSel) {
+    storeDishData(dish, venueName, allergen, list, listImg, categoriesSel, language) {
       sessionStorage.setItem('dish', JSON.stringify(dish));
       sessionStorage.setItem('venueName', venueName);
       sessionStorage.setItem('allergensDish', JSON.stringify(allergen));
       sessionStorage.setItem('list', list);
       sessionStorage.setItem('listImg', listImg);
       sessionStorage.setItem('categorySelected', JSON.stringify(categoriesSel));
+      sessionStorage.setItem('currentLanguage', language);
     },
     handleUpdateOpenList(value) {
       this.list = value;
