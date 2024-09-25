@@ -47,13 +47,13 @@ export default {
 .left {
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
-  border-left: 1px solid var(--text-color);
+  margin-left: 1.5px;
 }
 
 .right {
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
-  border-right: 1px solid var(--text-color);
+  margin-right: 1.5px;
 }
 
 .pill-button:hover {
