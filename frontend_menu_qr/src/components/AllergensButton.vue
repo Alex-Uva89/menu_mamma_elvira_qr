@@ -1,25 +1,43 @@
 <template>
     <span>
-        <button class="pill-button" @click="toggleShowAllergens" style="color: var(--white); font-size: 14.5px; padding: 9px 5px; width: 90px">
+        <button class="pill-button" @click="toggleShowAllergens"
+            style="color: var(--white); font-size: 14.5px; padding: 9px 5px; width: 90px">
             {{ allergenText }}
         </button>
-        <div v-if="showAllergens" class="allergens-modal" :style="{ background: `var(--header-${venuePath.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">
+        <div v-if="showAllergens" class="allergens-modal"
+            :style="{ background: `var(--header-${venuePath.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">
             <div style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
                 <ul>
-                    <li v-for="allergen in allergens" :key="allergen.id" :id="allergen.id" >
-                        <span :class="{'allergen': true, 'selected': isSelected(allergen)}" @click="filterAllergen(allergen)">
+                    <li v-for="allergen in allergens" :key="allergen.id" :id="allergen.id">
+                        <span :class="{ 'allergen': true, 'selected': isSelected(allergen) }"
+                            @click="filterAllergen(allergen)">
                             <img :src="allergen.icon" alt="">
                         </span>
                         <span>
-                            {{ language === 'it' ? allergen.name : allergen.name_en }}
+                            {{ language === 'it' ? allergen.name :
+                                language === 'en' ? allergen.name_en :
+                                    language === 'fr' ? allergen.name_fr :
+                                        allergen.name
+                            }}
                         </span>
                     </li>
                 </ul>
                 <div class="allergenReset">
                     <button @click="resetAllergens">
-                        {{ language === 'it' ? 'deseleziona tutti gli allergeni' : 'deselect all allergens' }}
+                        {{ language === 'it' ? 'deseleziona tutti gli allergeni' :
+                            language === 'fr' ? 'déselectionner tous les allergènes' :
+                                language === 'en' ? 'deselect all allergens' :
+                                    'deseleziona tutti gli allergeni'
+                        }}
                     </button>
-                    <div class="nb">{{ language === 'it'? 'NB. comunicare sempre allergeni allo staff' : 'NB. always communicate allergens to the staff' }}</div>
+                    <div class="nb">
+                        {{
+                            language === 'it' ? 'NB. comunicare sempre allergeni allo staff' :
+                                language === 'fr' ? 'NB. toujours communiquer les allergènes au personnel' :
+                                    language === 'en' ? 'NB. always communicate allergens to the staff' :
+                                        'NB. per favore comunicare gli allergeni allo staff'
+                        }}
+                    </div>
                 </div>
             </div>
         </div>
@@ -76,19 +94,21 @@ export default {
         isSelected(allergen) {
             return this.selectedAllergens.some(a => a.id === allergen.id);
         },
-        resetAllergens(){
+        resetAllergens() {
             this.selectedAllergens = [];
             this.$emit('filter-allergen', this.selectedAllergens);
         }
     },
     computed: {
         allergenText() {
-            switch (this.language) {
-                case 'it':
-                return this.showAllergens ? 'applica' : 'allergeni';
-                default:
-                return this.showAllergens ? 'apply' : 'allergens';
-            }
+            const texts = {
+                it: { true: 'applica', false: 'allergeni' },
+                en: { true: 'apply', false: 'allergens' },
+                fr: { true: 'appliquer', false: 'allergènes' },
+            };
+
+            const defaultText = { true: 'apply', false: 'allergens' };
+            return (texts[this.language] || defaultText)[this.showAllergens];
         }
     }
 }
@@ -102,7 +122,7 @@ export default {
     top: 139px;
     right: 0;
     color: var(--black);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     z-index: 100;
     display: flex;
     flex-direction: column;
@@ -110,14 +130,16 @@ export default {
     align-items: center;
     padding-bottom: 20px;
     height: calc(100vh - 140px);
-    ul{
+
+    ul {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
         align-items: start;
         width: 95%;
         font-size: 1rem;
-        .allergen{
+
+        .allergen {
             filter: contrast(.5);
             display: flex;
             flex-direction: column;
@@ -126,21 +148,25 @@ export default {
             word-wrap: break-word;
             text-align: center;
             width: calc(100% / 4);
-            &.selected{
+
+            &.selected {
                 filter: contrast(1.5);
             }
-            img{
+
+            img {
                 width: 40px;
             }
         }
-        li{
+
+        li {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             width: calc(100% / 3);
             margin: 5px 0;
-            span{
+
+            span {
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -148,6 +174,7 @@ export default {
             }
         }
     }
+
     .nb {
         color: var(--text-color);
         font-size: .7rem;
@@ -156,12 +183,13 @@ export default {
     }
 }
 
-.allergenReset{
+.allergenReset {
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin-bottom: 5px;
-    button{
+
+    button {
         width: 80%;
         margin: auto;
         color: var(--white);
