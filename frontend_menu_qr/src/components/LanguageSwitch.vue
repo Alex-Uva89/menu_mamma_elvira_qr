@@ -39,7 +39,7 @@ export default {
 }
 
 .pill-button {
-  padding: 10px 13px;
+  padding: 7px 13px;
   border: none;
   cursor: pointer;
 }
