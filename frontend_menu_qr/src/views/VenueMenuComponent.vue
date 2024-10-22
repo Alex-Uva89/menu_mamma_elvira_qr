@@ -201,11 +201,9 @@ export default {
 
           if (this.categorySelected.length != 0) {
             this.categories = this.categorySelected;
-            console.log('SELEZIONATA', this.categories);
 
           } else {
             this.categories = categoriesArray[0];
-            console.log('NON SELEZIONATA', this.categories);
           }
 
           this.categoryName = this.categories.name;
