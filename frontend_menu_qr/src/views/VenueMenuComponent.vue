@@ -10,8 +10,8 @@
     <!-- DRINK -->
     <template v-if="Array.isArray(categories)">
       <template
-        v-if="categories.some(category => category.is_drink && category.is_active && category.drinks.length > 0)">
-        <template v-for="category in categories" :key="category.id">
+      v-if="categories.some(category => category.is_drink && category.is_active && category.drinks.length > 0)">
+      <template v-for="category in categories" :key="category.id">
           <div
             v-if="category.is_drink && category.is_active && category.drinks.length > 0 && categoryName != 'Vermouth' && categoryName != 'Birre'"
             class="category-container">
@@ -201,9 +201,11 @@ export default {
 
           if (this.categorySelected.length != 0) {
             this.categories = this.categorySelected;
+            console.log('SELEZIONATA', this.categories);
 
           } else {
             this.categories = categoriesArray[0];
+            console.log('NON SELEZIONATA', this.categories);
           }
 
           this.categoryName = this.categories.name;
