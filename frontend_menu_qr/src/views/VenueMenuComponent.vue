@@ -30,10 +30,10 @@
                     v-if="drink.is_active && !Object.values(selectedAllergens).some(selected => !allergensDrink.some(allergen => allergen.drink_id == drink.id && allergen.allergen_id == selected.id))">
                     <card v-if="listImg" :language="currentLanguage" :dish="drink" :venuePath="venueName"
                       :isDrink="category.is_drink"
-                      :isWine="category.name.toLowerCase().includes('vini') || category.name.toLowerCase().includes('bolle')" />
+                      :isWine="category.name.toLowerCase().includes('vini') || category.name.toLowerCase().includes('bolle') || category.name.toLowerCase().includes('champagne') || category.name.toLowerCase().includes('spumanti')" />
                     <list v-if="list" :language="currentLanguage" :dish="drink" :venuePath="venueName"
                       :isDrink="category.is_drink"
-                      :isWine="category.name.toLowerCase().includes('vini') || category.name.toLowerCase().includes('bolle')" />
+                      :isWine="category.name.toLowerCase().includes('vini') || category.name.toLowerCase().includes('bolle') || category.name.toLowerCase().includes('champagne') || category.name.toLowerCase().includes('spumanti')" />
                   </router-link>
                 </span>
               </li>
