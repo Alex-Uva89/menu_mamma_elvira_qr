@@ -99,6 +99,7 @@ app.get('/api/venues/:venue', (req, res) => {
     LEFT JOIN dishes d ON c.id = d.category_id AND d.venue_id = v.id
     LEFT JOIN drinks dr ON c.id = dr.category_id AND dr.venue_id = v.id
     WHERE v.name = ?
+    ORDER BY d.name ASC, dr.name ASC
   `;
 
   connection.query(query, [venueName], (err, results) => {
