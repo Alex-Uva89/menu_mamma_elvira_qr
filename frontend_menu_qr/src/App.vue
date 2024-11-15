@@ -21,7 +21,7 @@
   height: 100vh;
   width: 100%;
   background-color: var(--mamma-stone);
-  overflow: hidden;
+  overflow: auto;
   scrollbar-width: none;
   .home-title{
     height: 10vh;
