@@ -24,7 +24,7 @@
         <span v-if="dish.description">{{ dish.description }}</span>
         <p v-if="dish.instructions"
           :style="{ background: `var(--nav-${venueName.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">
-          Ingredienti</p>
+          Descrizione</p>
         <span v-if="dish.instructions">{{ dish.instructions }}</span>
         <p v-if="dish.degrees"
           :style="{ background: `var(--nav-${venueName.replace(/\s+/g, '-').replace(/,/g, '').replace(/'/g, '')})` }">
