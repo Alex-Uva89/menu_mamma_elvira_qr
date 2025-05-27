@@ -99,9 +99,9 @@
         {{ venueName === 'Enoteca'
           ? (categories.name === 'Degustazione di Vino'
             ? ''
-            : (currentLanguage === 'it' ? 'Coperto: 1' :
-              currentLanguage === 'en' ? 'Cover charge: 1' :
-                currentLanguage === 'fr' ? 'Couvert: 1' : 'Coperto: 1'))
+            : (currentLanguage === 'it' ? 'Coperto: 2' :
+              currentLanguage === 'en' ? 'Cover charge: 2' :
+                currentLanguage === 'fr' ? 'Couvert: 2' : 'Coperto: 2'))
           : (currentLanguage === 'it' ? 'Coperto: 3' :
             currentLanguage === 'en' ? 'Cover charge: 3' :
               currentLanguage === 'fr' ? 'Couvert: 3' : 'Coperto: 3')
