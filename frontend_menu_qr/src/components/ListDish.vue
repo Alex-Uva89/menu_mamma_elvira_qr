@@ -45,7 +45,7 @@
             <div>
               <img src="https://img.icons8.com/ios-filled/50/wine.png" alt="wine" class="icon" /> {{ dish.price }} |
               <img width="50" height="50" src="https://img.icons8.com/glyph-neue/64/shopping-bag--v1.png"
-                alt="shopping-bag" class="icon" /> {{ dish.price - (Math.ceil(dish.price / 4 + 50)) }}
+                alt="shopping-bag" class="icon" /> {{ dish.price }}
             </div>
             <div>{{ language === 'it' ? 'vino non disponibile al calice' :
               language === 'en' ? 'wine not available by the glass' :
