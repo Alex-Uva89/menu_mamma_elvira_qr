@@ -23,9 +23,9 @@
       <li v-if="showDrinks && hasDistillati" @click="sendDataDistillati"
         :class="{ active: activeCategory === 'Distillati' }">
         <span class="categories">
-          {{ language === 'it' ? 'Altri Alcolici' :
-            language === 'en' ? 'Other Spirits' :
-              language === 'fr' ? 'Autres Alcools' :
+          {{ language === 'it' ? 'Cocktails & Drinks' :
+            language === 'en' ? 'Cocktails & Drinks' :
+              language === 'fr' ? 'Cocktails & Drinks' :
                 'Altri Alcolici' }}
         </span>
       </li>
