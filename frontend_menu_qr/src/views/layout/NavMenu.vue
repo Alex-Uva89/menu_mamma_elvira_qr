@@ -23,10 +23,10 @@
       <li v-if="showDrinks && hasDistillati" @click="sendDataDistillati"
         :class="{ active: activeCategory === 'Distillati' }">
         <span class="categories">
-          {{ language === 'it' ? 'Cocktails & Drinks' :
-            language === 'en' ? 'Cocktails & Drinks' :
-              language === 'fr' ? 'Cocktails & Drinks' :
-                'Altri Alcolici' }}
+          {{ language === 'it' ? 'Drinks' :
+            language === 'en' ? 'Drinks' :
+              language === 'fr' ? 'Drinks' :
+                'Drinks' }}
         </span>
       </li>
       <li v-if="showDrinks && hasCocktails" @click="sendDataCocktails"
@@ -102,7 +102,7 @@ export default {
       return false;
     },
     hasCocktails() {
-      return Object.values(this.categories).some(category => category.is_drink && category.name.toLowerCase().includes('cocktails'));
+      return Object.values(this.categories).some(category => category.is_drink && /cocktail(s)?/i.test(category.name));
     },
     hasDistillati() {
       return Object.values(this.categories).some(category => category.is_drink && !category.name.toLowerCase().includes('vini') && !category.name.toLowerCase().includes('cocktails') && !category.name.toLowerCase().includes('bolle') && !category.name.toLowerCase().includes('champagne'));
@@ -164,7 +164,9 @@ export default {
       this.activeCategory = 'Distillati';
     },
     sendDataCocktails() {
-      this.cocktails = Object.values(this.categories).filter(category => category.is_drink && category.name.toLowerCase().includes('cocktails'));
+      this.cocktails = Object.values(this.categories).filter(category =>
+        category.is_drink && /cocktail(s)?/i.test(category.name)
+      );
       this.$emit('update-category', this.cocktails);
       this.$emit('category-name', 'Cocktails');
       this.activeCategory = 'Cocktails';
