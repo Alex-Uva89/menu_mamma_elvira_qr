@@ -19,20 +19,40 @@ const corsOptions = {
 // Serve static files from the Vue frontend app
 app.use(express.static(path.join(__dirname, '..', 'frontend_menu_qr', 'dist')));
 
-const connection = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME
-});
+let connection;
 
-connection.connect((err) => {
-  if (err) {
-    console.error('Error connecting to the database:', err);
-    return;
-  }
-  console.log('Connected to the MySQL database successfully');
-});
+function handleDisconnect() {
+  connection = mysql.createConnection({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
+  });
+
+  connection.connect(err => {
+    if (err) {
+      console.error('Error connecting to the database:', err);
+      // Riprova dopo 2 secondi se non si connette
+      setTimeout(handleDisconnect, 2000);
+    } else {
+      console.log('Connected to the MySQL database successfully');
+    }
+  });
+
+  connection.on('error', err => {
+    console.error('MySQL error', err);
+    if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+      console.log('Reconnecting to the database...');
+      handleDisconnect();
+    } else {
+      throw err;
+    }
+  });
+}
+
+handleDisconnect();
+
+// Routes
 
 app.get('/api/venues', (req, res) => {
   const query = `SELECT name FROM venues`;
@@ -186,7 +206,6 @@ app.get('/api/allergens', (req, res) => {
     res.json(results);
   });
 });
-
 
 app.get('/api/dishes/allergens', (req, res) => {
   const query = `SELECT * FROM allergen_dish`;
