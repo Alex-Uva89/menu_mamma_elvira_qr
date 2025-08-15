@@ -2,6 +2,7 @@ const { defineConfig } = require('@vue/cli-service');
 const webpack = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin'); // Importa TerserPlugin
 
+
 module.exports = defineConfig({
   transpileDependencies: true,
   configureWebpack: {
