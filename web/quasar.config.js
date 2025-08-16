@@ -167,6 +167,10 @@ export default defineConfig((ctx) => {
     // https://v2.quasar.dev/quasar-cli-vite/developing-pwa/configuring-pwa
     pwa: {
     workboxMode: 'GenerateSW',    // semplice e affidabile
+    workboxOptions: {
+      skipWaiting: true,
+      clientsClaim: true
+    },
     injectPwaMetaTags: true,      // auto <meta>, theme-color, ecc.
 
     manifest: {
