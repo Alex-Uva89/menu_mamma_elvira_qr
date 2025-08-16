@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npm --prefix web run build",
     "start": "node server.js",
-    "heroku-postbuild": "npm --prefix web install && npm --prefix web run build"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm --prefix web ci && npm --prefix web run build"
   },
   "dependencies": {
     "compression": "^1.7.4",
