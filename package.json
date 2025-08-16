@@ -2,17 +2,15 @@
   "name": "mamma-elvira",
   "version": "1.0.0",
   "private": true,
-  "engines": {
-    "node": ">=18"
-  },
+  "engines": { "node": "20.x", "npm": "10.x" },
   "scripts": {
     "build": "npm --prefix web run build",
     "start": "node server.js",
-    "heroku-postbuild": "npm --prefix web ci && npm --prefix web run build"
+    "heroku-postbuild": "npm --prefix web install && npm --prefix web run build"
   },
   "dependencies": {
     "compression": "^1.7.4",
-    "express": "^5.0.0",
-    "serve-static": "^1.15.0"
+    "express": "^4.19.2",
+    "serve-static": "^1.16.2"
   }
 }
